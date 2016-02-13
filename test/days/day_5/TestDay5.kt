@@ -7,7 +7,7 @@ import org.junit.Test
  */
 class TestDay5 {
 
-    val SIMPLE_ANSWER = "2550"
+    val SIMPLE_ANSWER = "255"
     val ADVANCED_ANSWER = "55"
 
     @Test
