@@ -6,7 +6,8 @@ import org.junit.Test
 
 /**
  */
-class TestDay6 {
+class
+TestDay6 {
 
     val SIMPLE_ANSWER = "377891"
     val ADVANCED_ANSWER = "14110788"
