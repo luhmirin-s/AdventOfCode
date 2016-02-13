@@ -8,7 +8,7 @@ abstract class AbstractDay {
     private var input: List<String>
 
     constructor(folderName: String) {
-        val path = "inputs/%s/input.in".format(folderName)
+        val path = "inputs/%s.in".format(folderName)
         input = Files.readAllLines(Paths.get(path))
 
     }
