@@ -19,11 +19,10 @@ class Day7 : AbstractDay("day_7") {
         var newCommands = commands
                 .filter { command -> command.gate != Gate.IN || !command.resultWire.contentEquals(NEW_INPUT_WIRE) }
                 .toMutableList()
-        newCommands.add(Command(NEW_INPUT_WIRE, arrayOf(valueA.toString()),Gate.IN))
+        newCommands.add(Command(NEW_INPUT_WIRE, arrayOf(valueA.toString()), Gate.IN))
 
         return newCommands.sort().resolve()[RESULT_WIRE].toString()
     }
-
 
 
     enum class Gate { OR, AND, LSHIFT, RSHIFT, NOT, IN }

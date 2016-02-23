@@ -18,16 +18,15 @@ abstract class AbstractDay {
     abstract fun calculateAdvanced(): String;
 
 
-
-    fun input() : List<String> {
+    fun input(): List<String> {
         return input;
     }
 
-    fun inputFirstLine() : String {
+    fun inputFirstLine(): String {
         return input.first()
     }
 
-    fun inputFirstLineChars() :  List<Char> {
+    fun inputFirstLineChars(): List<Char> {
         return input.first().toCharArray().asList()
     }
 }

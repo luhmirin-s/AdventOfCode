@@ -24,7 +24,6 @@ class Day2 : AbstractDay("day_2") {
     }
 
 
-
     private data class Dimensions(val l: Int, val w: Int, val h: Int)
 
     private fun Dimensions.asList(): List<Int> {

@@ -1,6 +1,5 @@
 package days.week4
 
-import days.week4.Day20
 import org.junit.Assert.assertEquals
 import org.junit.Test
 

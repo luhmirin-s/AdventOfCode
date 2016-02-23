@@ -1,7 +1,6 @@
 package days.week2
 
 import core.AbstractDay
-import java.util.*
 
 class Day8 : AbstractDay("day_8") {
 

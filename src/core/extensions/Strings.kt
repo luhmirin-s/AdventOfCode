@@ -13,7 +13,7 @@ fun String.md5Hex(): String {
     return hexStr.addLeadingZeros()
 }
 
-fun String.addLeadingZeros(maxLength : Int = 32): String {
+fun String.addLeadingZeros(maxLength: Int = 32): String {
     if (this.length >= maxLength) return this;
 
     val pattern = "%0" + (maxLength - this.length) + "d%s"

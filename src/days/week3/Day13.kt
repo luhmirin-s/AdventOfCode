@@ -9,6 +9,6 @@ class Day13 : AbstractDay("day_13") {
     }
 
     override fun calculateAdvanced(): String {
-       throw NotImplementedError()
+        throw NotImplementedError()
     }
 }
