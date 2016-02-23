@@ -7,3 +7,8 @@ fun Int.isOdd(): Boolean {
 fun Int.toBinary(): String {
     return Integer.toString(this, 2)
 }
+
+fun Int.factorial(): Int {
+    if (this < 1) return 1
+    return 1.rangeTo(this).fold(1) { a, b -> a * b }
+}

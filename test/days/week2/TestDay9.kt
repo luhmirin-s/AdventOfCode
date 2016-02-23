@@ -1,6 +1,5 @@
 package days.week2
 
-import days.week2.Day9
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
@@ -8,8 +7,8 @@ import org.junit.Test
  */
 class TestDay9 {
 
-    val SIMPLE_ANSWER = "0"
-    val ADVANCED_ANSWER = "0"
+    val SIMPLE_ANSWER = "251"
+    val ADVANCED_ANSWER = "898"
 
     @Test
     fun testCalculate() {
@@ -20,4 +19,7 @@ class TestDay9 {
     fun testCalculateAdvanced() {
         assertEquals(ADVANCED_ANSWER, Day9().calculateAdvanced())
     }
+
+
+
 }
