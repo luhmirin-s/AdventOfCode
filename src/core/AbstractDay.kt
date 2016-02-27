@@ -10,7 +10,6 @@ abstract class AbstractDay {
     constructor(folderName: String) {
         val path = "inputs/%s.in".format(folderName)
         input = Files.readAllLines(Paths.get(path))
-
     }
 
     abstract fun calculate(): String ;
@@ -18,16 +17,10 @@ abstract class AbstractDay {
     abstract fun calculateAdvanced(): String;
 
 
-    fun input(): List<String> {
-        return input;
-    }
+    fun input(): List<String> = input
 
-    fun inputFirstLine(): String {
-        return input.first()
-    }
+    fun inputFirstLine() = input.first()
 
-    fun inputFirstLineChars(): List<Char> {
-        return input.first().toCharArray().asList()
-    }
+    fun inputFirstLineChars() = input.first().toCharArray().asList()
 }
 
