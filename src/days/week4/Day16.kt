@@ -37,29 +37,28 @@ class Day16 : AbstractDay("day_16") {
                 .first().num
                 .toString()
     }
+
+
+    private data class Aunt(val num: Int, var things: Map<String, Int>)
+
+    private fun String.parseAunt(): Aunt {
+        val tokens = this.split(" ")
+        val num = tokens[1].removeSuffix(":").toInt()
+        val thingMap: MutableMap<String, Int> = HashMap()
+
+        thingMap.put(tokens[2].removeSuffix(":"), tokens[3].removeSuffix(",").toInt())
+        thingMap.put(tokens[4].removeSuffix(":"), tokens[5].removeSuffix(",").toInt())
+        thingMap.put(tokens[6].removeSuffix(":"), tokens[7].toInt())
+        return Aunt(num, thingMap)
+    }
+
+
+    private fun Map<String, Int>.noKeyOrExactly(key: String, amount: Int)
+            = if (!this.containsKey(key)) true else this[key] == amount
+
+    private fun Map<String, Int>.noKeyOrMoreThan(key: String, amount: Int)
+            = if (!this.containsKey(key)) true else this[key] ?: 0 > amount
+
+    private fun Map<String, Int>.noKeyOrLessThan(key: String, amount: Int)
+            = if (!this.containsKey(key)) true else this[key] ?: 0 < amount
 }
-
-data class Aunt(val num: Int, var things: Map<String, Int>)
-
-fun String.parseAunt(): Aunt {
-    val tokens = this.split(" ")
-
-    val num = tokens[1].removeSuffix(":").toInt()
-    var thingMap: MutableMap<String, Int> = HashMap()
-
-    thingMap.put(tokens[2].removeSuffix(":"), tokens[3].removeSuffix(",").toInt())
-    thingMap.put(tokens[4].removeSuffix(":"), tokens[5].removeSuffix(",").toInt())
-    thingMap.put(tokens[6].removeSuffix(":"), tokens[7].toInt())
-
-    return Aunt(num, thingMap)
-}
-
-fun Map<String, Int>.noKeyOrExactly(key: String, amount: Int)
-        = if (!this.containsKey(key)) true else this[key] == amount
-
-
-fun Map<String, Int>.noKeyOrMoreThan(key: String, amount: Int)
-        = if (!this.containsKey(key)) true else this[key] ?: 0 > amount
-
-fun Map<String, Int>.noKeyOrLessThan(key: String, amount: Int)
-        = if (!this.containsKey(key)) true else this[key] ?: 0 < amount
