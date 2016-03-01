@@ -5,7 +5,7 @@ import org.junit.Test
 
 /**
  */
-class SetsTest {
+class PermutationsTest {
 
     @Test
     fun testPermutations() {
