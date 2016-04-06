@@ -2,7 +2,6 @@ package days.week4
 
 import core.AbstractDay
 import java.util.*
-import java.util.regex.Pattern
 
 class Day19 : AbstractDay("day_19") {
 
@@ -19,7 +18,7 @@ class Day19 : AbstractDay("day_19") {
     }
 
     override fun calculateAdvanced(): String {
-        // I cheated a bt on this
+        // I cheated a bit on this
         // https://www.reddit.com/r/adventofcode/comments/3xflz8/day_19_solutions/cy4etju
 
         return (
@@ -29,7 +28,6 @@ class Day19 : AbstractDay("day_19") {
                         - 1
                 ).toString()
     }
-
 
     private fun List<String>.parseReplacements(): Map<String, MutableList<String>> {
         var replacements: MutableMap<String, MutableList<String>> = HashMap()
