@@ -20,10 +20,12 @@ fun String.addLeadingZeros(maxLength: Int = 32): String {
     return String.format(pattern, 0, this);
 }
 
-fun String.toIntOrElse(default: Int) : Int {
+fun String.toIntOrElse(default: Int): Int {
     try {
         return this.toInt()
     } catch (e: NumberFormatException) {
         return default
     }
 }
+
+fun String.getLastWord(): String = this.split(' ').last()

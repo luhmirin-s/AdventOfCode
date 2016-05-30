@@ -17,4 +17,12 @@ class StringsTest {
         assertEquals("aaa3a34", "aaa3a34".addLeadingZeros(maxLength = 7))
     }
 
+    @Test
+    fun testGetLastWord() {
+        assertEquals("test", "test".getLastWord())
+        assertEquals("st", "te st".getLastWord())
+        assertEquals("t", "t e s t".getLastWord())
+    }
+
+
 }
