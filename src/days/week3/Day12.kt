@@ -2,7 +2,7 @@ package days.week3
 
 import core.AbstractDay
 
-class Day12 : AbstractDay("day_12") {
+class Day12 : AbstractDay("week3/day_12") {
 
     override fun calculate(): String {
         throw NotImplementedError()
