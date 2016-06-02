@@ -1,13 +1,14 @@
 package days.week5
 
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertTrue
 import org.junit.Test
 
 /**
  */
 class TestDay25 {
 
-    val SIMPLE_ANSWER = "0"
+    val SIMPLE_ANSWER = "9132360"
     val ADVANCED_ANSWER = "0"
 
     @Test
@@ -17,6 +18,7 @@ class TestDay25 {
 
     @Test
     fun testCalculateAdvanced() {
-        assertEquals(ADVANCED_ANSWER, Day25().calculateAdvanced())
+        assertTrue(true)
+        // this one is for free
     }
 }
