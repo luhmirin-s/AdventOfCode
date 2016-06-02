@@ -1,75 +1,15 @@
 package days.week3
 
 import core.AbstractDay
-import core.extensions.permutations
-import core.extensions.toIntOrElse
-import java.util.*
 
 class Day13 : AbstractDay("day_13") {
 
     override fun calculate(): String {
-        var names: MutableSet<String> = HashSet()
-        var happinessChanges = input().map { str ->
-            var tokens = str.split(" ")
-            names.add(tokens[0])
-            Happiness(tokens[0], tokens[10].removeSuffix("."), parseNumber(tokens))
-        }
-
-        return names.permutations()
-                .toHappinessChangeList(happinessChanges)
-                .max().toString()
+        throw NotImplementedError()
     }
 
     override fun calculateAdvanced(): String {
-        var names: MutableSet<String> = HashSet()
-        var happinessChanges: MutableList<Happiness> = ArrayList()
-        input().forEach { str ->
-            var tokens = str.split(" ")
-            names.add(tokens[0])
-            happinessChanges.add(Happiness(tokens[0], tokens[10].removeSuffix("."), tokens[2].toSign() * tokens[3].toIntOrElse(0)))
-        }
-        // plugging "me" in
-        names.toList().forEach {
-            happinessChanges.add(Happiness(it, "me", 0))
-            happinessChanges.add(Happiness("me", it, 0))
-        }
-        names.add("me")
-
-        return names.permutations()
-                .toHappinessChangeList(happinessChanges)
-                .max().toString()
+        throw NotImplementedError()
     }
 
-
-    private fun parseNumber(tokens: List<String>) = tokens[2].toSign() * tokens[3].toIntOrElse(0)
-
-    private fun String.toSign() = if (this.equals("lose")) -1 else 1
-
-
-    private data class Happiness(val who: String, val neighbour: String, val change: Int)
-
-    private fun List<List<String>>.toHappinessChangeList(happinessChanges: List<Happiness>) =
-            this.map { nameSequence ->
-                var changes: MutableList<Int> = ArrayList()
-                nameSequence.forEachIndexed { i, name ->
-                    // add to changes one before and one after current
-                    if (i == 0) {
-                        // handle first
-                        changes.add(happinessChanges.findHappinessChange(name, nameSequence[nameSequence.size - 1]))
-                        changes.add(happinessChanges.findHappinessChange(name, nameSequence[1]))
-                    } else if (i == nameSequence.size - 1) {
-                        // handle last
-                        changes.add(happinessChanges.findHappinessChange(name, nameSequence[i - 1]))
-                        changes.add(happinessChanges.findHappinessChange(name, nameSequence[0]))
-                    } else {
-                        // handle middle
-                        changes.add(happinessChanges.findHappinessChange(name, nameSequence[i - 1]))
-                        changes.add(happinessChanges.findHappinessChange(name, nameSequence[i + 1]))
-                    }
-                }
-                changes.sum()
-            }
-
-    private fun List<Happiness>.findHappinessChange(name: String, neighbour: String) =
-            this.first { it.who.equals(name) && it.neighbour.equals(neighbour) }.change
 }
