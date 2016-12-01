@@ -3,12 +3,12 @@ package core
 import java.nio.file.Files
 import java.nio.file.Paths
 
-abstract class AbstractDay {
+abstract class AbstractDay(folderName: String) {
 
     private var input: List<String>
 
-    constructor(folderName: String) {
-        val path = "inputs/%s.in".format(folderName)
+    init {
+        val path = "inputs/$folderName.in"
         input = Files.readAllLines(Paths.get(path))
     }
 
@@ -16,11 +16,11 @@ abstract class AbstractDay {
 
     abstract fun calculateAdvanced(): String;
 
-
     fun input(): List<String> = input
 
     fun inputFirstLine() = input.first()
 
     fun inputFirstLineChars() = input.first().toCharArray().asList()
+
 }
 
