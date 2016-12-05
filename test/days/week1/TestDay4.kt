@@ -7,8 +7,8 @@ import org.junit.Test
  */
 class TestDay4 {
 
-    var SIMPLE_ANSWER = "-1"
-    val ADVANCED_ANSWER = "-1"
+    var SIMPLE_ANSWER = "361724"
+    val ADVANCED_ANSWER = "482"
 
     @Test
     fun testCalculate() {
