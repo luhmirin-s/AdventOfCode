@@ -26,3 +26,5 @@ fun String.addLeadingZeros(maxLength: Int = 32): String {
     val pattern = "%0" + (maxLength - this.length) + "d%s"
     return String.format(pattern, 0, this)
 }
+
+fun <T> List<T>.joinWithoutSpaces() = this.joinToString("")

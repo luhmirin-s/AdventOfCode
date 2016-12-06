@@ -1,6 +1,7 @@
 package days.week1
 
 import core.AbstractDay
+import core.joinWithoutSpaces
 import kotlin.comparisons.compareBy
 
 class Day4 : AbstractDay("week1/day_4") {
@@ -24,13 +25,13 @@ class Day4 : AbstractDay("week1/day_4") {
 
         fun calculatedSum(): String {
             val charMap = mutableMapOf<Char, Int>()
-            words.joinToString("").toList().sorted().forEach {
+            words.joinWithoutSpaces().toList().sorted().forEach {
                 val count = charMap.getOrPut(it) { 0 }
                 charMap.put(it, count + 1)
             }
             return charMap.toList()
                     .sortedWith(compareBy<Pair<Char, Int>>({ -it.second }, { it.first }))
-                    .map { it.first }.joinToString("")
+                    .map { it.first }.joinWithoutSpaces()
                     .substring(0..4)
         }
 
