@@ -7,8 +7,8 @@ import org.junit.Test
  */
 class TestDay7 {
 
-    var SIMPLE_ANSWER = "-1"
-    val ADVANCED_ANSWER = "-1"
+    var SIMPLE_ANSWER = "110"
+    val ADVANCED_ANSWER = "242"
 
     @Test
     fun testCalculate() {
@@ -19,4 +19,5 @@ class TestDay7 {
     fun testCalculateAdvanced() {
         assertEquals(ADVANCED_ANSWER, Day7().calculateAdvanced())
     }
+
 }
