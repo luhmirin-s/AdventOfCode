@@ -28,3 +28,6 @@ fun String.addLeadingZeros(maxLength: Int = 32): String {
 }
 
 fun <T> List<T>.joinWithoutSpaces() = this.joinToString("")
+
+fun String.toIndex() = this.toInt() - 1
+fun Int.toIndex() = this - 1
