@@ -9,6 +9,11 @@ fun <T, R> List<T>.collect(collector: R, action: ((R, T) -> Unit)): R {
     return collector
 }
 
+fun <T, R> List<T>.collectIndexed(collector: R, action: ((R, Int, T) -> Unit)): R {
+    this.forEachIndexed { i, item -> action.invoke(collector, i, item) }
+    return collector
+}
+
 fun String.toListOfInts() = this.trim().split(" ").filterNot(String::isNullOrBlank).map { it.trim().toInt() }
 
 fun String.md5Hex(): String {
