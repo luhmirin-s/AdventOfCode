@@ -36,3 +36,7 @@ fun <T> List<T>.joinWithoutSpaces() = this.joinToString("")
 
 fun String.toIndex() = this.toInt() - 1
 fun Int.toIndex() = this - 1
+
+fun Int.isOdd() = this % 2 != 0
+
+fun Int.toBinary() = Integer.toString(this, 2)
