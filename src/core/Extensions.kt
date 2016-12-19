@@ -40,3 +40,14 @@ fun Int.toIndex() = this - 1
 fun Int.isOdd() = this % 2 != 0
 
 fun Int.toBinary() = Integer.toString(this, 2)
+
+fun <T> List<T>.printEach(prefix: String? = null, suffix: String? = null): List<T> {
+    prefix?.print()
+    this.forEach(::println)
+    suffix?.print()
+    return this
+}
+
+fun <T> T.print() {
+    println(this)
+}
