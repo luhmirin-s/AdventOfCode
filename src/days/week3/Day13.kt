@@ -22,21 +22,21 @@ class Day13 : AbstractDay("week3/day_13") {
                 .count().toString()
     }
 
-    data class Point(val x: Int, val y: Int, val salt: Int)
+    private data class Point(val x: Int, val y: Int, val salt: Int)
 
-    fun Point.isWall(): Boolean {
+    private fun Point.isWall(): Boolean {
         return this.x < 0 || this.y < 0
                 || ((x * x) + (3 * x) + (2 * x * y) + y + (y * y) + salt).toBinary()
                 .toCharArray().filter { it == '1' }.count().isOdd()
     }
 
     //This represent 4 directions right, left, down , up
-    val dx = intArrayOf(0, 0, 1, -1)
-    val dy = intArrayOf(1, -1, 0, 0)
+    private val dx = intArrayOf(0, 0, 1, -1)
+    private val dy = intArrayOf(1, -1, 0, 0)
 
-    fun Point.getNeighbour(direction: Int) = Point(this.x + dx[direction], this.y + dy[direction], this.salt)
+    private fun Point.getNeighbour(direction: Int) = Point(this.x + dx[direction], this.y + dy[direction], this.salt)
 
-    fun Point.findAllAchievablePoints(): Map<Point, Int> {
+    private fun Point.findAllAchievablePoints(): Map<Point, Int> {
         val visited = mutableMapOf<Point, Int>(this to 0)
         val path = mutableListOf(this)
 
