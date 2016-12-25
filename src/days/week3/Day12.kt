@@ -22,43 +22,57 @@ class Day12 : AbstractDay("week3/day_12") {
         var counter = 0
         while (counter < this.size) {
             val tokens = this[counter]
-            when (tokens.command()) {
-                "cpy" -> {
-                    when (tokens.firstReg()) {
-                        in registers.keys -> {
-                            registers[tokens.secondReg()] = registers.getOrPut(tokens.firstReg(), { 0 })
-                        }
-                        else -> {
-                            registers[tokens.secondReg()] = tokens.firstValue()
-                        }
-                    }
-                    counter++
-                }
-                "inc" -> {
-                    val value = registers.getOrPut(tokens.firstReg(), { 0 })
-                    registers[tokens.firstReg()] = value + 1
-                    counter++
-                }
-                "dec" -> {
-                    val value = registers.getOrPut(tokens.firstReg(), { 0 })
-                    registers[tokens.firstReg()] = value - 1
-                    counter++
-                }
-                "jnz" -> {
-                    val flag = when (tokens.firstReg()) {
-                        in registers.keys -> registers[tokens.firstReg()]!!
-                        else -> tokens.firstValue()
-                    }
-                    if (flag == 0) {
-                        counter++
-                    } else {
-                        counter += tokens.secondValue()
-                    }
-                }
+            counter = when (tokens.command()) {
+                "cpy" -> cpy(counter, registers, tokens)
+                "inc" -> inc(counter, registers, tokens)
+                "dec" -> dec(counter, registers, tokens)
+                "jnz" -> jnz(counter, registers, tokens)
+                else -> 0
             }
             if (counter < 0) counter = 0
         }
         return registers
+    }
+
+    private fun inc(counter: Int, registers: MutableMap<Char, Int>, tokens: List<String>): Int {
+        val value = registers.getOrPut(tokens.firstReg(), { 0 })
+        registers[tokens.firstReg()] = value + 1
+        return counter + 1
+    }
+
+    private fun dec(counter: Int, registers: MutableMap<Char, Int>, tokens: List<String>): Int {
+        val value = registers.getOrPut(tokens.firstReg(), { 0 })
+        registers[tokens.firstReg()] = value - 1
+        return counter + 1
+    }
+
+    private fun cpy(counter: Int, registers: MutableMap<Char, Int>, tokens: List<String>): Int {
+        when (tokens.firstReg()) {
+            in registers.keys -> {
+                registers[tokens.secondReg()] = registers.getOrPut(tokens.firstReg(), { 0 })
+            }
+            else -> {
+                registers[tokens.secondReg()] = tokens.firstValue()
+            }
+        }
+        return counter + 1
+    }
+
+    private fun jnz(counter: Int, registers: MutableMap<Char, Int>, tokens: List<String>): Int {
+        val flag = when (tokens.firstReg()) {
+            in registers.keys -> registers[tokens.firstReg()]!!
+            else -> tokens.firstValue()
+        }
+        val distance = when (tokens.secondReg()) {
+            in registers.keys -> registers[tokens.secondReg()]!!
+            else -> tokens.secondValue()
+        }
+
+        if (flag == 0) {
+            return counter + 1
+        } else {
+            return counter + distance
+        }
     }
 
     fun List<String>.command() = this[0]
