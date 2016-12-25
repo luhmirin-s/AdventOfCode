@@ -3,6 +3,7 @@ package core
 import java.math.BigInteger
 import java.nio.charset.Charset
 import java.security.MessageDigest
+import java.util.*
 
 fun <T, R> List<T>.collect(collector: R, action: ((R, T) -> Unit)): R {
     this.forEach { action.invoke(collector, it) }
@@ -50,4 +51,22 @@ fun <T> List<T>.printEach(prefix: String? = null, suffix: String? = null): List<
 
 fun <T> T.print() {
     println(this)
+}
+
+fun Int.factorial() =
+        if (this < 1) 1
+        else 1.rangeTo(this).fold(1) { a, b -> a * b }
+
+fun <T> Set<T>.permutations(): List<List<T>> {
+    val initList = this.toList()
+    return (0..initList.size.factorial() - 1).map { permutation(it, initList) }
+}
+
+private fun <T> permutation(no: Int, items: List<T>) = permutationHelper(no, LinkedList(items), ArrayList())
+
+private fun <T> permutationHelper(no: Int, input: MutableList<T>, output: MutableList<T>): List<T> {
+    if (input.isEmpty()) return output
+    val subFactorial = (input.size - 1).factorial()
+    output.add(input.removeAt(no / subFactorial))
+    return permutationHelper((no % subFactorial), input, output)
 }
