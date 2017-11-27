@@ -1,18 +1,18 @@
 package y2016.week1
 
 
+import core.AbstractDay
 import core.extensions.toListOfInts
-import y2016.DayOf2016
 
-class Day3 : DayOf2016("week1/day_3") {
+class Day3(input: List<String>) : AbstractDay(input) {
     override fun calculate(): String {
-        return input().map(String::toListOfInts)
+        return input.map(String::toListOfInts)
             .filter { it.isValidTriangle() }
             .count().toString()
     }
 
     override fun calculateAdvanced(): String {
-        return input().map(String::toListOfInts).switchRowsToColumns()
+        return input.map(String::toListOfInts).switchRowsToColumns()
             .filter { it.isValidTriangle() }
             .count().toString()
     }

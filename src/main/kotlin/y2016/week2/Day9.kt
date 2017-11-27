@@ -1,15 +1,15 @@
 package y2016.week2
 
-import y2016.DayOf2016
+import core.AbstractDay
 
-class Day9 : DayOf2016("week2/day_9") {
+class Day9(input: List<String>) : AbstractDay(input) {
 
     override fun calculate(): String {
-        return inputFirstLine().decompressedSize().toString()
+        return inputFirstLine.decompressedSize().toString()
     }
 
     override fun calculateAdvanced(): String {
-        return inputFirstLine().recursiveDecompressedSize().toString()
+        return inputFirstLine.recursiveDecompressedSize().toString()
     }
 
     fun String.decompressedSize(): Long {

@@ -1,12 +1,12 @@
 package y2016.week4
 
+import core.AbstractDay
 import core.extensions.md5Hex
-import y2016.DayOf2016
 
-class Day17 : DayOf2016("week4/day_17") {
+class Day17(input: List<String>) : AbstractDay(input) {
 
     override fun calculate(): String {
-        val salt = inputFirstLine()
+        val salt = inputFirstLine
 
         return Room(salt, 0, 0).getPossiblePaths()
             .sortedBy { it.length }
@@ -16,7 +16,7 @@ class Day17 : DayOf2016("week4/day_17") {
 
 
     override fun calculateAdvanced(): String {
-        val salt = inputFirstLine()
+        val salt = inputFirstLine
 
         return Room(salt, 0, 0).getPossiblePaths()
             .sortedBy { it.length }

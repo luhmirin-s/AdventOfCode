@@ -1,8 +1,8 @@
 package y2015.week3
 
-import y2015.DayOf2015
+import core.AbstractDay
 
-class Day11 : DayOf2015("day_11") {
+class Day11(input: List<String>) : AbstractDay(input) {
 
     private val LETTERS = listOf(
         'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm',
@@ -11,14 +11,14 @@ class Day11 : DayOf2015("day_11") {
 
 
     override fun calculate(): String {
-        return inputFirstLineChars()
+        return inputFirstLineChars
             .mapToInt()
             .findNextPassword()
             .toFinalString()
     }
 
     override fun calculateAdvanced(): String {
-        return inputFirstLineChars()
+        return inputFirstLineChars
             .mapToInt()
             .findNextPassword()
             .findNextPassword()

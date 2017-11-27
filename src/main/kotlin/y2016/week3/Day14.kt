@@ -1,22 +1,22 @@
 package y2016.week3
 
+import core.AbstractDay
 import core.extensions.md5Hex
-import y2016.DayOf2016
 
-class Day14 : DayOf2016("week3/day_14") {
+class Day14(input: List<String>) : AbstractDay(input) {
 
     /*
     Indices are messed up for some reason and I spent too much time to care anymore :(
     Finding codes is at least correct
      */
     override fun calculate(): String {
-        return findCodes(inputFirstLine())
+        return findCodes(inputFirstLine)
             .sortedWith(compareBy { it.second })[62]
             .second.toString()
     }
 
     override fun calculateAdvanced(): String {
-        return findCodes(inputFirstLine(), 2016)
+        return findCodes(inputFirstLine, 2016)
             .sortedWith(compareBy { it.second })[66]
             .second.toString()
     }

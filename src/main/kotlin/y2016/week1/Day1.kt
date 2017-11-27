@@ -1,18 +1,18 @@
 package y2016.week1
 
+import core.AbstractDay
 import core.extensions.collect
-import y2016.DayOf2016
 
-class Day1 : DayOf2016("week1/day_1") {
+class Day1(input: List<String>) : AbstractDay(input) {
 
     override fun calculate(): String {
-        return inputFirstLine().split(", ").map { it.toStep() }
+        return inputFirstLine.split(", ").map { it.toStep() }
             .collect(Position(0, Point(0, 0)), Position::move)
             .currentPoint.getDistanceToZero().toString()
     }
 
     override fun calculateAdvanced(): String {
-        return inputFirstLine().split(", ").map { it.toStep() }
+        return inputFirstLine.split(", ").map { it.toStep() }
             .collect(Position(0, Point(0, 0)), Position::move)
             .firstCrossPoint?.getDistanceToZero().toString()
     }

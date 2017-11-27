@@ -1,19 +1,19 @@
 package y2015.week5
 
+import core.AbstractDay
 import core.extensions.getSumPermutationSet
-import y2015.DayOf2015
 
-class Day24 : DayOf2015("day_24") {
+class Day24(input: List<String>) : AbstractDay(input) {
 
     override fun calculate(): String {
-        return input()
+        return input
             .map { it.toInt() }
             .sortedDescending()
             .getQeForFirstGroup(3)
     }
 
     override fun calculateAdvanced(): String {
-        return input()
+        return input
             .map { it.toInt() }
             .sortedDescending()
             .getQeForFirstGroup(4)

@@ -1,18 +1,18 @@
 package y2015.week3
 
-import y2015.DayOf2015
+import core.AbstractDay
 
-class Day14 : DayOf2015("day_14") {
+class Day14(input: List<String>) : AbstractDay(input) {
 
     override fun calculate(): String {
-        return input().parseReindeer()
+        return input.parseReindeer()
             .calculateMovement(2503)
             .map { it.distance }
             .max().toString()
     }
 
     override fun calculateAdvanced(): String {
-        return input().parseReindeer()
+        return input.parseReindeer()
             .calculateMovement(2503)
             .map { it.points }
             .max().toString()

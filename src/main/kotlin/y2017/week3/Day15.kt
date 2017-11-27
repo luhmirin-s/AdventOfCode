@@ -1,8 +1,8 @@
 package y2017.week3
 
-import y2017.DayOf2017
+import core.AbstractDay
 
-class Day15 : DayOf2017("week3/day_15") {
+class Day15(input: List<String>) : AbstractDay(input) {
 
     override fun calculate(): String {
         TODO()

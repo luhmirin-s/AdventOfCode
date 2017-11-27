@@ -1,15 +1,15 @@
 package y2015.week5
 
-import y2015.DayOf2015
+import core.AbstractDay
 
-class Day25 : DayOf2015("day_25") {
+class Day25(input: List<String>) : AbstractDay(input) {
 
     private val INPUT_PATTERN = ".* row (.*), column (.*)."
 
     override fun calculate(): String {
 
         val groups = Regex(INPUT_PATTERN)
-            .matchEntire(inputFirstLine())
+            .matchEntire(inputFirstLine)
             ?.groups
 
         val maxRow = groups?.get(1)?.value?.toInt() ?: 0

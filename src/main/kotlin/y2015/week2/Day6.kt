@@ -1,13 +1,13 @@
 package y2015.week2
 
-import y2015.DayOf2015
+import core.AbstractDay
 
-class Day6 : DayOf2015("day_6") {
+class Day6(input: List<String>) : AbstractDay(input) {
 
     override fun calculate(): String {
         val bulbGrid = Grid();
 
-        input().forEach { str ->
+        input.forEach { str ->
             val command = str.toCommand()
             when (command.action) {
                 Action.ON -> bulbGrid.turnOn(command.range)
@@ -21,7 +21,7 @@ class Day6 : DayOf2015("day_6") {
     override fun calculateAdvanced(): String {
         val bulbGrid = Grid();
 
-        input().forEach { str ->
+        input.forEach { str ->
             val command = str.toCommand()
             when (command.action) {
                 Action.ON -> bulbGrid.turnUp(command.range)

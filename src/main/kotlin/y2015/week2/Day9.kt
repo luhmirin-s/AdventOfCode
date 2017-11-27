@@ -1,10 +1,10 @@
 package y2015.week2
 
+import core.AbstractDay
 import core.extensions.permutations
-import y2015.DayOf2015
 import java.util.*
 
-class Day9 : DayOf2015("day_9") {
+class Day9(input: List<String>) : AbstractDay(input) {
 
     override fun calculate(): String {
         val towns: MutableSet<String> = HashSet()
@@ -35,7 +35,7 @@ class Day9 : DayOf2015("day_9") {
     private data class Route(val start: String, val end: String, val distance: Int)
 
     private fun fillCollections(routes: MutableList<Route>, towns: MutableSet<String>) {
-        input().forEach {
+        input.forEach {
             val tokens = it.split(" ")
             val fromTown = tokens[0]
             val toTown = tokens[2]

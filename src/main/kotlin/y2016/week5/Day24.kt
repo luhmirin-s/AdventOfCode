@@ -1,12 +1,12 @@
 package y2016.week5
 
+import core.AbstractDay
 import core.extensions.permutations
-import y2016.DayOf2016
 
-class Day24 : DayOf2016("week5/day_24") {
+class Day24(input: List<String>) : AbstractDay(input) {
 
     override fun calculate(): String {
-        val field = input().parse()
+        val field = input.parse()
         val positions = field.findPlacesToVisit()
         val filteredDistances = getDistanceMap(field, positions)
 
@@ -18,7 +18,7 @@ class Day24 : DayOf2016("week5/day_24") {
     }
 
     override fun calculateAdvanced(): String {
-        val field = input().parse()
+        val field = input.parse()
         val positions = field.findPlacesToVisit()
         val filteredDistances = getDistanceMap(field, positions)
 

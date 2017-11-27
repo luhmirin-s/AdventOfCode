@@ -1,19 +1,19 @@
 package y2016.week1
 
+import core.AbstractDay
 import core.extensions.joinWithoutSpaces
-import y2016.DayOf2016
 
-class Day4 : DayOf2016("week1/day_4") {
+class Day4(input: List<String>) : AbstractDay(input) {
 
     override fun calculate(): String {
-        return input().map { it.breakToList().toEntry() }
+        return input.map { it.breakToList().toEntry() }
             .filter { it.calculatedSum() == it.sum }
             .sumBy { it.id }
             .toString()
     }
 
     override fun calculateAdvanced(): String {
-        return input().map { it.breakToList().toEntry() }
+        return input.map { it.breakToList().toEntry() }
             .filter { it.calculatedSum() == it.sum && it.decode() == "northpole object storage" }
             .first().id.toString()
     }

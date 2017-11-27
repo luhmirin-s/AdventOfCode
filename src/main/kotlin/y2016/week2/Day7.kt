@@ -1,19 +1,19 @@
 package y2016.week2
 
-import y2016.DayOf2016
+import core.AbstractDay
 import java.util.regex.Pattern
 
 
-class Day7 : DayOf2016("week2/day_7") {
+class Day7(input: List<String>) : AbstractDay(input) {
 
     override fun calculate(): String {
-        return input().map { it.breakLines() }
+        return input.map { it.breakLines() }
             .filter { it.hasTls() }
             .count().toString()
     }
 
     override fun calculateAdvanced(): String {
-        return input().map { it.breakLines() }
+        return input.map { it.breakLines() }
             .filter { it.hasSsl() }
             .count().toString()
     }

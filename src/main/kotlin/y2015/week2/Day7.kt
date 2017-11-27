@@ -1,17 +1,17 @@
 package y2015.week2
 
-import y2015.DayOf2015
+import core.AbstractDay
 import java.util.*
 
-class Day7 : DayOf2015("day_7") {
+class Day7(input: List<String>) : AbstractDay(input) {
 
     private val RESULT_WIRE = "a"
     private val NEW_INPUT_WIRE = "b"
 
-    override fun calculate() = input().parse().sort().resolve()[RESULT_WIRE].toString()
+    override fun calculate() = input.parse().sort().resolve()[RESULT_WIRE].toString()
 
     override fun calculateAdvanced(): String {
-        val commands = input().parse().sort()
+        val commands = input.parse().sort()
         val valueA = commands.resolve().get(RESULT_WIRE)
 
         val newCommands = commands

@@ -1,13 +1,13 @@
 package y2015.week4
 
+import core.AbstractDay
 import core.extensions.getAllDivisors
-import y2015.DayOf2015
 import java.util.*
 
-class Day20 : DayOf2015("day_20") {
+class Day20(input: List<String>) : AbstractDay(input) {
 
     override fun calculate(): String {
-        val finalValue = inputFirstLine().toInt() / 10
+        val finalValue = inputFirstLine.toInt() / 10
         var houseNumber = 1
         val divisors: MutableSet<Int> = HashSet()
 
@@ -21,7 +21,7 @@ class Day20 : DayOf2015("day_20") {
     }
 
     override fun calculateAdvanced(): String {
-        val finalValue = inputFirstLine().toInt() / 11
+        val finalValue = inputFirstLine.toInt() / 11
         var houseNumber = 0
 
         val divisors: MutableSet<Int> = HashSet()

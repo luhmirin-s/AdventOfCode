@@ -1,18 +1,18 @@
 package y2016.week4
 
+import core.AbstractDay
 import core.extensions.isOdd
 import core.extensions.joinWithoutSpaces
 import core.extensions.toIndex
-import y2016.DayOf2016
 
-class Day16 : DayOf2016("week4/day_16") {
+class Day16(input: List<String>) : AbstractDay(input) {
 
     override fun calculate(): String {
-        return inputFirstLine().expand(272).toCheckSum()
+        return inputFirstLine.expand(272).toCheckSum()
     }
 
     override fun calculateAdvanced(): String {
-        return inputFirstLine().expand(35651584).toCheckSum()
+        return inputFirstLine.expand(35651584).toCheckSum()
     }
 
 

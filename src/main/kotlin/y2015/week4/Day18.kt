@@ -1,8 +1,8 @@
 package y2015.week4
 
-import y2015.DayOf2015
+import core.AbstractDay
 
-class Day18 : DayOf2015("day_18") {
+class Day18(input: List<String>) : AbstractDay(input) {
 
     private val SIZE = 100
 
@@ -18,14 +18,14 @@ class Day18 : DayOf2015("day_18") {
     private val CORNER_4 = SIZE * SIZE - 1
 
     override fun calculate(): String {
-        return input().toBooleanList()
+        return input.toBooleanList()
             .iterateSteps(100, false)
             .count { it }
             .toString()
     }
 
     override fun calculateAdvanced(): String {
-        return input().toBooleanList()
+        return input.toBooleanList()
             .iterateSteps(100, true)
             .count { it }
             .toString()

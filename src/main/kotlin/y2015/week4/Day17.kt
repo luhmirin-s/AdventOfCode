@@ -1,12 +1,12 @@
 package y2015.week4
 
+import core.AbstractDay
 import core.extensions.getSumPermutationSet
-import y2015.DayOf2015
 
-class Day17 : DayOf2015("day_17") {
+class Day17(input: List<String>) : AbstractDay(input) {
 
     override fun calculate(): String {
-        return input()
+        return input
             .map { it.toInt() }
             .getSumPermutationSet(150)
             .count()
@@ -14,7 +14,7 @@ class Day17 : DayOf2015("day_17") {
     }
 
     override fun calculateAdvanced(): String {
-        val sumSet = input()
+        val sumSet = input
             .map { it.toInt() }
             .getSumPermutationSet(150)
 

@@ -1,18 +1,18 @@
 package y2015.week2
 
-import y2015.DayOf2015
+import core.AbstractDay
 
-class Day10 : DayOf2015("day_10") {
+class Day10(input: List<String>) : AbstractDay(input) {
 
     override fun calculate(): String {
-        var line = inputFirstLine()
+        var line = inputFirstLine
         for (i in 0..39)
             line = transform(line)
         return line.length.toString()
     }
 
     override fun calculateAdvanced(): String {
-        var line = inputFirstLine()
+        var line = inputFirstLine
         for (i in 0..49)
             line = transform(line)
         return line.length.toString()

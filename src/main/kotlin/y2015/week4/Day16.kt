@@ -1,12 +1,12 @@
 package y2015.week4
 
-import y2015.DayOf2015
+import core.AbstractDay
 import java.util.*
 
-class Day16 : DayOf2015("day_16") {
+class Day16(input: List<String>) : AbstractDay(input) {
 
     override fun calculate(): String {
-        return input().map { it.parseAunt() }
+        return input.map { it.parseAunt() }
             .filter { it.things.noKeyOrExactly("children", 3) }
             .filter { it.things.noKeyOrExactly("cats", 7) }
             .filter { it.things.noKeyOrExactly("samoyeds", 2) }
@@ -23,7 +23,7 @@ class Day16 : DayOf2015("day_16") {
 
 
     override fun calculateAdvanced(): String {
-        return input().map { it.parseAunt() }
+        return input.map { it.parseAunt() }
             .filter { it.things.noKeyOrExactly("children", 3) }
             .filter { it.things.noKeyOrMoreThan("cats", 7) }
             .filter { it.things.noKeyOrExactly("samoyeds", 2) }

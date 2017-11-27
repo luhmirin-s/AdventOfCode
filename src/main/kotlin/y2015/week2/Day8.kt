@@ -1,15 +1,15 @@
 package y2015.week2
 
-import y2015.DayOf2015
+import core.AbstractDay
 
-class Day8 : DayOf2015("day_8") {
+class Day8(input: List<String>) : AbstractDay(input) {
 
     val CODE_PATTERN = "\\\\x[a-f0-9]{2}"
 
     override fun calculate(): String {
 
-        val countCodeChars = input().map { it.length }.sum()
-        val countChars = input().map {
+        val countCodeChars = input.map { it.length }.sum()
+        val countChars = input.map {
             it.toLowerCase()
                 .replace("\\\\", "X")
                 .replace("\\\"", "X")
@@ -21,8 +21,8 @@ class Day8 : DayOf2015("day_8") {
 
     override fun calculateAdvanced(): String {
 
-        val initialCodeChars = input().map { it.length }.sum()
-        val countCodeChars = input().map {
+        val initialCodeChars = input.map { it.length }.sum()
+        val countCodeChars = input.map {
             it.toLowerCase()
                 .replace("\\", "\\\\")
                 .replace("\"", "\\\"")

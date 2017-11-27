@@ -1,12 +1,12 @@
 package y2015.week5
 
-import y2015.DayOf2015
+import core.AbstractDay
 import java.util.*
 
-class Day21 : DayOf2015("day_21") {
+class Day21(input: List<String>) : AbstractDay(input) {
 
     override fun calculate(): String {
-        val boss = input().parseBoss()
+        val boss = input.parseBoss()
 
         return ITEM_SETS()
             .filter {
@@ -18,7 +18,7 @@ class Day21 : DayOf2015("day_21") {
     }
 
     override fun calculateAdvanced(): String {
-        val boss = input().parseBoss()
+        val boss = input.parseBoss()
 
         return ITEM_SETS()
             .filter {

@@ -1,20 +1,20 @@
 package y2016.week3
 
+import core.AbstractDay
 import core.extensions.isOdd
-import y2016.DayOf2016
 
 
-class Day13 : DayOf2016("week3/day_13") {
+class Day13(input: List<String>) : AbstractDay(input) {
 
     val MAX_SIZE = 1000
 
     override fun calculate(): String {
-        val salt = inputFirstLine().toInt()
+        val salt = inputFirstLine.toInt()
         return Point(1, 1, salt).findAllAchievablePoints()[Point(31, 39, salt)].toString()
     }
 
     override fun calculateAdvanced(): String {
-        val salt = inputFirstLine().toInt()
+        val salt = inputFirstLine.toInt()
         return Point(1, 1, salt)
             .findAllAchievablePoints()
             .filterValues { it <= 50 }

@@ -1,18 +1,18 @@
 package y2016.week5
 
-import y2016.DayOf2016
+import core.AbstractDay
 
-class Day23 : DayOf2016("week5/day_23") {
+class Day23(input: List<String>) : AbstractDay(input) {
 
     override fun calculate(): String {
-        return input().map { it.split(" ") }
+        return input.map { it.split(" ") }
             .executeInstructions(mutableMapOf('a' to 7, 'b' to 0, 'c' to 0, 'd' to 0))
             .get('a')
             ?.toString() ?: ""
     }
 
     override fun calculateAdvanced(): String {
-        return input().map { it.split(" ") }
+        return input.map { it.split(" ") }
             .executeInstructions(mutableMapOf('a' to 12, 'b' to 0, 'c' to 0, 'd' to 0))
             .get('a')
             ?.toString() ?: ""

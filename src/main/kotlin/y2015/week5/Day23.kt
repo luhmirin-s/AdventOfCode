@@ -1,9 +1,9 @@
 package y2015.week5
 
+import core.AbstractDay
 import core.extensions.isOdd
-import y2015.DayOf2015
 
-class Day23 : DayOf2015("day_23") {
+class Day23(input: List<String>) : AbstractDay(input) {
 
     override fun calculate(): String {
         val registers = mutableMapOf(
@@ -11,7 +11,7 @@ class Day23 : DayOf2015("day_23") {
             'b' to 0
         )
 
-        input().map { it.toInstruction() }.executeInstructions(registers)
+        input.map { it.toInstruction() }.executeInstructions(registers)
 
         return registers['b'].toString()
     }
@@ -22,7 +22,7 @@ class Day23 : DayOf2015("day_23") {
             'b' to 0
         )
 
-        input().map { it.toInstruction() }.executeInstructions(registers)
+        input.map { it.toInstruction() }.executeInstructions(registers)
 
         return registers['b'].toString()
     }

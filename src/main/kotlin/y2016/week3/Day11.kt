@@ -1,9 +1,9 @@
 package y2016.week3
 
+import core.AbstractDay
 import core.extensions.collectIndexed
-import y2016.DayOf2016
 
-class Day11 : DayOf2016("week3/day_11") {
+class Day11(input: List<String>) : AbstractDay(input) {
 
     /*
     All props for this goes to https://www.reddit.com/r/adventofcode/comments/5hoia9/2016_day_11_solutions/db4ccgv/
@@ -11,11 +11,11 @@ class Day11 : DayOf2016("week3/day_11") {
      */
 
     override fun calculate(): String {
-        return input().collectState().calculateState().toString()
+        return input.collectState().calculateState().toString()
     }
 
     override fun calculateAdvanced(): String {
-        return input().mapIndexed { i, s ->
+        return input.mapIndexed { i, s ->
             when (i) {
                 0 -> "$s An elerium generator. An elerium-compatible microchip. A dilithium generator. A dilithium-compatible microchip."
                 else -> s

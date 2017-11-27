@@ -1,14 +1,14 @@
 package y2016.week1
 
-import y2016.DayOf2016
+import core.AbstractDay
 
 
-class Day2 : DayOf2016("week1/day_2") {
+class Day2(input: List<String>) : AbstractDay(input) {
     override fun calculate(): String {
         var result = ""
         var btm = SquareButton(5)
 
-        input().map(String::toCharArray).forEach { arr ->
+        input.map(String::toCharArray).forEach { arr ->
             arr.forEach { ch -> btm = btm.move(ch) }
             result += btm.value.toString()
         }
@@ -19,7 +19,7 @@ class Day2 : DayOf2016("week1/day_2") {
         var result = ""
         var btm = RombButton(5)
 
-        input().map(String::toCharArray).forEach { arr ->
+        input.map(String::toCharArray).forEach { arr ->
             arr.forEach { ch -> btm = btm.move(ch) }
             result += btm.stringValue()
         }

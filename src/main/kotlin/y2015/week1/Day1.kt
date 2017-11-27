@@ -1,13 +1,13 @@
 package y2015.week1
 
-import y2015.DayOf2015
+import core.AbstractDay
 
-class Day1 : DayOf2015("day_1") {
+class Day1(input: List<String>) : AbstractDay(input) {
 
     override fun calculate(): String {
         var floor = 0
 
-        inputFirstLineChars().forEachIndexed { _, c ->
+        inputFirstLineChars.forEachIndexed { _, c ->
             floor += c.handleSymbol()
         }
         return floor.toString()
@@ -17,7 +17,7 @@ class Day1 : DayOf2015("day_1") {
         var floor = 0
         var firstBasement = -1
 
-        inputFirstLineChars().forEachIndexed { i, c ->
+        inputFirstLineChars.forEachIndexed { i, c ->
             floor += c.handleSymbol()
             if (firstBasement < 0 && floor < 0) {
                 firstBasement = i + 1 // because base 0 index

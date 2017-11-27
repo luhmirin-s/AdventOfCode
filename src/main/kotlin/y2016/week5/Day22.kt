@@ -1,14 +1,14 @@
 package y2016.week5
 
-import y2016.DayOf2016
+import core.AbstractDay
 
 
-class Day22 : DayOf2016("week5/day_22") {
+class Day22(input: List<String>) : AbstractDay(input) {
 
     val PATTERN = Regex("/dev/grid/node-x(\\d{1,2})-y(\\d{1,2})\\s+(\\d{1,3})T\\s+(\\d{1,3})T\\s+(\\d{1,3})T.*")
 
     override fun calculate(): String {
-        return input().parse().getAllPairs().size.toString()
+        return input.parse().getAllPairs().size.toString()
     }
 
     override fun calculateAdvanced(): String {

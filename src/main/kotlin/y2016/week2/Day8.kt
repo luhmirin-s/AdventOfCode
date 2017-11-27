@@ -1,10 +1,10 @@
 package y2016.week2
 
+import core.AbstractDay
 import core.extensions.collect
 import core.extensions.toIndex
-import y2016.DayOf2016
 
-class Day8 : DayOf2016("week2/day_8") {
+class Day8(input: List<String>) : AbstractDay(input) {
 
     companion object {
         private val MAX_COLUMNS = 50
@@ -14,7 +14,7 @@ class Day8 : DayOf2016("week2/day_8") {
     }
 
     override fun calculate(): String {
-        return input().map { it.toCommand() }
+        return input.map { it.toCommand() }
             .collect(newScreen(), { screen, command -> command.exec(screen) })
             .toList()
             .flatMap { it.toList() }
@@ -24,7 +24,7 @@ class Day8 : DayOf2016("week2/day_8") {
     }
 
     override fun calculateAdvanced(): String {
-        val screen = input()
+        val screen = input
             .map { it.toCommand() }
             .collect(newScreen(), { screen, command -> command.exec(screen) })
 

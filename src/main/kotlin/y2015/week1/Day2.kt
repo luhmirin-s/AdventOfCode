@@ -1,18 +1,18 @@
 package y2015.week1
 
-import y2015.DayOf2015
+import core.AbstractDay
 
-class Day2 : DayOf2015("day_2") {
+class Day2(input: List<String>) : AbstractDay(input) {
 
     override fun calculate(): String {
-        return input()
+        return input
             .map { it.asDimension() }
             .sumBy { it.area() }
             .toString()
     }
 
     override fun calculateAdvanced(): String {
-        return input()
+        return input
             .map { it.asDimension() }
             .sumBy { it.ribbonLength() }
             .toString()

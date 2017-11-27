@@ -1,14 +1,14 @@
 package y2016.week5
 
+import core.AbstractDay
 import core.extensions.joinWithoutSpaces
-import y2016.DayOf2016
 
-class Day25 : DayOf2016("week5/day_25") {
+class Day25(input: List<String>) : AbstractDay(input) {
 
     override fun calculate(): String {
 
         for (i in 0..1000) {
-            val output = input().map { it.split(" ") }
+            val output = input.map { it.split(" ") }
                 .executeInstructions(mutableMapOf('a' to i, 'b' to 0, 'c' to 0, 'd' to 0))
                 .joinWithoutSpaces()
             if (output == "0101010101") return i.toString()

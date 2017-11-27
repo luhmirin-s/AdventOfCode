@@ -1,13 +1,13 @@
 package y2016.week5
 
+import core.AbstractDay
 import core.extensions.toIndex
-import y2016.DayOf2016
 
-class Day21 : DayOf2016("week5/day_21") {
+class Day21(input: List<String>) : AbstractDay(input) {
 
     override fun calculate(): String {
         var letters = "abcdefgh".toCharArray().toMutableList().toMutableMap()
-        input().forEach {
+        input.forEach {
             letters = it.split(" ").execute(letters)
         }
         return letters.values.joinToString("")
@@ -16,7 +16,7 @@ class Day21 : DayOf2016("week5/day_21") {
     override fun calculateAdvanced(): String {
         var letters = "fbgdceah".toCharArray().toMutableList().toMutableMap()
 
-        input().reversed().forEach {
+        input.reversed().forEach {
             letters = it.split(" ").execute(letters, reversed = true)
         }
         return letters.values.joinToString("")

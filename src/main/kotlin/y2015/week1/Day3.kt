@@ -1,11 +1,11 @@
 package y2015.week1
 
 
+import core.AbstractDay
 import core.extensions.isOdd
-import y2015.DayOf2015
 import java.util.*
 
-class Day3 : DayOf2015("day_3") {
+class Day3(input: List<String>) : AbstractDay(input) {
 
     override fun calculate(): String {
         var position = Coord(0, 0)
@@ -13,7 +13,7 @@ class Day3 : DayOf2015("day_3") {
 
         visitedHomes.add(position)
 
-        inputFirstLineChars().forEach { c ->
+        inputFirstLineChars.forEach { c ->
             position = position.move(c)
             visitedHomes.add(position)
         }
@@ -30,7 +30,7 @@ class Day3 : DayOf2015("day_3") {
         visitedHomes.add(santaPosition)
         visitedHomes.add(roboSantaPosition)
 
-        inputFirstLineChars().forEachIndexed { i, c ->
+        inputFirstLineChars.forEachIndexed { i, c ->
             if (i.isOdd()) {
                 santaPosition = santaPosition.move(c)
                 visitedHomes.add(santaPosition)

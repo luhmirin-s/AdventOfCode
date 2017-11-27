@@ -1,14 +1,14 @@
 package y2016.week4
 
+import core.AbstractDay
 import core.extensions.toIndex
-import y2016.DayOf2016
 
-class Day20 : DayOf2016("week4/day_20") {
+class Day20(input: List<String>) : AbstractDay(input) {
 
     val MAX = 4294967295L
 
     override fun calculate(): String {
-        return input().parseLines()
+        return input.parseLines()
             .removeOverlaps()
             .mergeAdjacent()
             .filter { !it.isStart }
@@ -17,7 +17,7 @@ class Day20 : DayOf2016("week4/day_20") {
     }
 
     override fun calculateAdvanced(): String {
-        return input().parseLines()
+        return input.parseLines()
             .removeOverlaps()
             .mergeAdjacent()
             .countGaps()

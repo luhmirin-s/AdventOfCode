@@ -1,7 +1,7 @@
 package y2015.week5
 
+import core.AbstractDay
 import core.extensions.getLastWord
-import y2015.DayOf2015
 import java.util.*
 
 /**
@@ -10,7 +10,7 @@ import java.util.*
  *
  * I just want to finish my tree. :)
  */
-class Day22 : DayOf2015("day_22") {
+class Day22(input: List<String>) : AbstractDay(input) {
 
     private val SPELL_COSTS = listOf(53, 73, 113, 173, 229)
     private val SPELL_TIMERS = listOf(1, 1, 6, 6, 5)
@@ -43,8 +43,8 @@ class Day22 : DayOf2015("day_22") {
         hero_hp = 50,
         hero_mana = 500,
         hero_armor = 0,
-        boss_hp = input()[0].getLastWord().toInt(),
-        boss_damage = input()[1].getLastWord().toInt(),
+        boss_hp = input[0].getLastWord().toInt(),
+        boss_damage = input[1].getLastWord().toInt(),
         mana_spent = 0,
         spellTimers = arrayOf(0, 0, 0, 0, 0),
         is_hero_turn = true

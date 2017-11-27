@@ -1,15 +1,15 @@
 package y2015.week3
 
+import core.AbstractDay
 import core.extensions.permutations
 import core.extensions.toIntOrElse
-import y2015.DayOf2015
 import java.util.*
 
-class Day13 : DayOf2015("day_13") {
+class Day13(input: List<String>) : AbstractDay(input) {
 
     override fun calculate(): String {
         val names: MutableSet<String> = HashSet()
-        val happinessChanges = input().map { str ->
+        val happinessChanges = input.map { str ->
             val tokens = str.split(" ")
             names.add(tokens[0])
             Happiness(tokens[0], tokens[10].removeSuffix("."), parseNumber(tokens))
@@ -23,7 +23,7 @@ class Day13 : DayOf2015("day_13") {
     override fun calculateAdvanced(): String {
         val names: MutableSet<String> = HashSet()
         val happinessChanges: MutableList<Happiness> = ArrayList()
-        input().forEach { str ->
+        input.forEach { str ->
             val tokens = str.split(" ")
             names.add(tokens[0])
             happinessChanges.add(Happiness(tokens[0], tokens[10].removeSuffix("."), tokens[2].toSign() * tokens[3].toIntOrElse(0)))

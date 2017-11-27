@@ -1,12 +1,12 @@
 package y2016.week1
 
+import core.AbstractDay
 import core.extensions.md5Hex
-import y2016.DayOf2016
 
-class Day5 : DayOf2016("week1/day_5") {
+class Day5(input: List<String>) : AbstractDay(input) {
 
     override fun calculate(): String {
-        val prefix = inputFirstLine()
+        val prefix = inputFirstLine
         val result = mutableListOf<Char>()
         for (i in 0..10000000) {
             val hex = "$prefix$i".md5Hex()
@@ -19,7 +19,7 @@ class Day5 : DayOf2016("week1/day_5") {
     }
 
     override fun calculateAdvanced(): String {
-        val prefix = inputFirstLine()
+        val prefix = inputFirstLine
         val result = sortedMapOf<Int, Char>()
         for (i in 0..50000000) {
             val hex = "$prefix$i".md5Hex()

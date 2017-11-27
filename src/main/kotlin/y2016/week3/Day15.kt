@@ -1,16 +1,16 @@
 package y2016.week3
 
-import y2016.DayOf2016
+import core.AbstractDay
 
-class Day15 : DayOf2016("week3/day_15") {
+class Day15(input: List<String>) : AbstractDay(input) {
 
     override fun calculate(): String {
-        val disks = input().toDisks()
+        val disks = input.toDisks()
         return findSuccessPosition(disks).toString()
     }
 
     override fun calculateAdvanced(): String {
-        val originalDisks = input().toDisks().toMutableList()
+        val originalDisks = input.toDisks().toMutableList()
         originalDisks.add(Disk(11, 0))
         return findSuccessPosition(originalDisks).toString()
     }
