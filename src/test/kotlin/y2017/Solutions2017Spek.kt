@@ -13,10 +13,10 @@ class Solutions2017Spek : Spek({
         val day = load2017input(1) { Day1(it) }
 
         it("gets star for simple") {
-            day.calculate().should.equal("-1")
+            day.calculate().should.equal("1203")
         }
         it("gets star for advanced") {
-            day.calculateAdvanced().should.equal("-1")
+            day.calculateAdvanced().should.equal("1146")
         }
     }
 
