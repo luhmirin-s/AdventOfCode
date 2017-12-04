@@ -33,7 +33,10 @@ class Day3(input: List<String>) : AbstractDay(input) {
         DOWN(0, -1)
     }
 
-    private fun getCellForCheck(valueCheck: (Int) -> Boolean, nextValueCallback: (List<Cell>, Cell) -> Int): Cell {
+    private inline fun getCellForCheck(
+        crossinline valueCheck: (Int) -> Boolean,
+        crossinline nextValueCallback: (List<Cell>, Cell) -> Int
+    ): Cell {
         val cells = mutableListOf<Cell>()
         var x = 0
         var y = 0

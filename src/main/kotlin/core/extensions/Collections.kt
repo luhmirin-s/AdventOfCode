@@ -1,11 +1,11 @@
 package core.extensions
 
-fun <T, R> List<T>.collect(collector: R, action: ((R, T) -> Unit)): R {
+inline fun <T, R> List<T>.collect(collector: R, crossinline action: ((R, T) -> Unit)): R {
     this.forEach { action.invoke(collector, it) }
     return collector
 }
 
-fun <T, R> List<T>.collectIndexed(collector: R, action: ((R, Int, T) -> Unit)): R {
+inline fun <T, R> List<T>.collectIndexed(collector: R, crossinline action: ((R, Int, T) -> Unit)): R {
     this.forEachIndexed { i, item -> action.invoke(collector, i, item) }
     return collector
 }
