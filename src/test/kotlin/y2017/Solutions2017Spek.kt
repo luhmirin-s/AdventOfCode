@@ -5,10 +5,7 @@ import core.load2017input
 import org.jetbrains.spek.api.Spek
 import org.jetbrains.spek.api.dsl.given
 import org.jetbrains.spek.api.dsl.it
-import y2017.week1.Day1
-import y2017.week1.Day2
-import y2017.week1.Day3
-import y2017.week1.Day4
+import y2017.week1.*
 
 class Solutions2017Spek : Spek({
 
@@ -53,6 +50,19 @@ class Solutions2017Spek : Spek({
         }
         it("gets star for advanced") {
             day.calculateAdvanced().should.equal("265")
+        }
+    }
+
+    // not 375043
+
+    given("day 5") {
+        val day = load2017input(5) { Day5(it) }
+
+        it("gets star for simple") {
+            day.calculate().should.equal("375042")
+        }
+        it("gets star for advanced") {
+            day.calculateAdvanced().should.equal("28707598")
         }
     }
 
