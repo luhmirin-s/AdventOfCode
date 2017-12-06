@@ -3,28 +3,21 @@ package y2017.week1
 import core.AbstractDay
 import kotlin.math.absoluteValue
 
+private typealias Point = Pair<Int, Int>
+private typealias Cell = Pair<Point, Int>
+private typealias Cells = Map<Point, Int>
+
 class Day3(input: List<String>) : AbstractDay(input) {
 
     override fun calculate(): String = inputFirstLine.toInt()
-        .let { num ->
-            getCellForCheck(
-                valueCheck = { it == num },
-                nextValueCallback = { _, c -> c.v + 1 }
-            )
-        }
-        .let { it.x.absoluteValue + it.y.absoluteValue }
+        .let { getCells(it) { _, _, v -> v + 1 } }
+        .let { it.first.first.absoluteValue + it.first.second.absoluteValue }
         .toString()
 
     override fun calculateAdvanced(): String = inputFirstLine.toInt()
-        .let { num ->
-            getCellForCheck(
-                valueCheck = { it > num },
-                nextValueCallback = { cells, c -> cells.getSumOfNeighbours(c.x, c.y) }
-            )
-        }.v.toString()
-
-
-    private data class Cell(val x: Int, val y: Int, val v: Int)
+        .let { getCells(it) { cells, c, _ -> cells.getSumOfNeighbours(c.first, c.second) } }
+        .second
+        .toString()
 
     private enum class Direction(val dx: Int, val dy: Int) {
         LEFT(1, 0),
@@ -33,48 +26,47 @@ class Day3(input: List<String>) : AbstractDay(input) {
         DOWN(0, -1)
     }
 
-    private inline fun getCellForCheck(
-        crossinline valueCheck: (Int) -> Boolean,
-        crossinline nextValueCallback: (List<Cell>, Cell) -> Int
+    private inline fun getCells(
+        maxValue: Int,
+        crossinline nextValueCallback: (Cells, Point, Int) -> Int
     ): Cell {
-        val cells = mutableListOf<Cell>()
+        val cells = mutableMapOf<Point, Int>()
         var x = 0
         var y = 0
         var v = 1
         var direction = Direction.LEFT
 
         for (i in 0..300000) {
-            val newCell = Cell(x, y, v)
-            cells.add(newCell)
+            cells.put(x to y, v)
 
-            if (valueCheck(v)) return newCell
+            if (v >= maxValue) return ((x to y) to v)
 
             x += direction.dx
             y += direction.dy
-            v = nextValueCallback(cells, Cell(x, y, v))
+            v = nextValueCallback(cells, x to y, v)
 
             when (direction) {
-                Direction.LEFT -> cells.getCellAt(x, y + 1) ?: run { direction = Direction.UP }
-                Direction.UP -> cells.getCellAt(x - 1, y) ?: run { direction = Direction.RIGHT }
-                Direction.RIGHT -> cells.getCellAt(x, y - 1) ?: run { direction = Direction.DOWN }
-                Direction.DOWN -> cells.getCellAt(x + 1, y) ?: run { direction = Direction.LEFT }
+                Direction.LEFT -> cells.getCellValueAt(x, y + 1) ?: run { direction = Direction.UP }
+                Direction.UP -> cells.getCellValueAt(x - 1, y) ?: run { direction = Direction.RIGHT }
+                Direction.RIGHT -> cells.getCellValueAt(x, y - 1) ?: run { direction = Direction.DOWN }
+                Direction.DOWN -> cells.getCellValueAt(x + 1, y) ?: run { direction = Direction.LEFT }
             }
         }
 
         throw RuntimeException("range too small")
     }
 
-    private fun List<Cell>.getSumOfNeighbours(x: Int, y: Int): Int = listOfNotNull(
-        getCellAt(x, y + 1),
-        getCellAt(x, y - 1),
-        getCellAt(x + 1, y + 1),
-        getCellAt(x + 1, y),
-        getCellAt(x + 1, y - 1),
-        getCellAt(x - 1, y + 1),
-        getCellAt(x - 1, y),
-        getCellAt(x - 1, y - 1)
-    ).map { it.v }.sum()
+    private fun Cells.getSumOfNeighbours(x: Int, y: Int): Int = listOfNotNull(
+        getCellValueAt(x, y + 1),
+        getCellValueAt(x, y - 1),
+        getCellValueAt(x + 1, y + 1),
+        getCellValueAt(x + 1, y),
+        getCellValueAt(x + 1, y - 1),
+        getCellValueAt(x - 1, y + 1),
+        getCellValueAt(x - 1, y),
+        getCellValueAt(x - 1, y - 1)
+    ).map { it }.sum()
 
-    private fun List<Cell>.getCellAt(x: Int, y: Int) = firstOrNull { it.x == x && it.y == y }
+    private fun Cells.getCellValueAt(x: Int, y: Int) = get(x to y)
 
 }
