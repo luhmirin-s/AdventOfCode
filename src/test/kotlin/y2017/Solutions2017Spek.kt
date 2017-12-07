@@ -7,6 +7,7 @@ import org.jetbrains.spek.api.dsl.given
 import org.jetbrains.spek.api.dsl.it
 import y2017.week1.*
 import y2017.week2.Day6
+import y2017.week2.Day7
 
 class Solutions2017Spek : Spek({
 
@@ -73,6 +74,17 @@ class Solutions2017Spek : Spek({
         }
         it("gets star for advanced") {
             day.calculateAdvanced().should.equal("1037")
+        }
+    }
+
+    given("day 7") {
+        val day = load2017input(7) { Day7(it) }
+
+        it("gets star for simple") {
+            day.calculate().should.equal("eqgvf")
+        }
+        it("gets star for advanced") {
+            day.calculateAdvanced().should.equal("757")
         }
     }
 

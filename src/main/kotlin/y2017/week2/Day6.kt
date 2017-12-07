@@ -41,7 +41,6 @@ class Day6(input: List<String>) : AbstractDay(input) {
             i = i.incLooping(size)
             d--
         }
-        return res
     }.toList()
 
     private fun List<Int>.mergeStacksWithDiff(startIndex: Int, diff: List<Int>) = List(this.size) {
