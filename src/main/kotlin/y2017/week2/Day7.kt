@@ -35,10 +35,9 @@ class Day7(input: List<String>) : AbstractDay(input) {
         }
     }
 
-    private fun List<Program>.getRoot(): String {
-        val links = flatMap { it.links }.toSet()
-        return first { !links.contains(it.name) }.name
-    }
+    private fun List<Program>.getRoot() = flatMap { it.links }.toSet()
+        .let { links -> first { !links.contains(it.name) } }
+        .name
 
     private fun replaceWeightsWithSums(programs: MutableMap<String, Program>, root: String) {
         programs[root]?.let {
@@ -56,17 +55,13 @@ class Day7(input: List<String>) : AbstractDay(input) {
         if (linkedPrograms.isEmpty()) return null
         // Find child with unusual weight or just stop
         val unusualChild = linkedPrograms.getChildWithUnusualWeight() ?: return null
-        // Find if it is unusual because of itš children
+        // Find if it is unusual because of it's children
         val unbalancedInChild = findUnbalancedProgram(programs, unusualChild.name)
         return unbalancedInChild ?: unusualChild.name
     }
 
-    // Don't look at this line, pls
-    private fun List<Program>.getChildWithUnusualWeight() = groupBy { it.weight }
-        .filterValues { it.size == 1 }
-        .takeIf { it.isNotEmpty() }
-        ?.values
-        ?.firstOrNull()
+    private fun List<Program>.getChildWithUnusualWeight() = groupBy { it.weight }.values
+        .firstOrNull { it.size == 1 }
         ?.firstOrNull()
 
     private fun Program.getWeightDiff(programsMap: MutableMap<String, Program>): Int = getLinked(programsMap)
