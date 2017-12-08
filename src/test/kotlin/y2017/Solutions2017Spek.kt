@@ -8,6 +8,7 @@ import org.jetbrains.spek.api.dsl.it
 import y2017.week1.*
 import y2017.week2.Day6
 import y2017.week2.Day7
+import y2017.week2.Day8
 
 class Solutions2017Spek : Spek({
 
@@ -85,6 +86,17 @@ class Solutions2017Spek : Spek({
         }
         it("gets star for advanced") {
             day.calculateAdvanced().should.equal("757")
+        }
+    }
+
+    given("day 8") {
+        val day = load2017input(8) { Day8(it) }
+
+        it("gets star for simple") {
+            day.calculate().should.equal("4448")
+        }
+        it("gets star for advanced") {
+            day.calculateAdvanced().should.equal("6582")
         }
     }
 

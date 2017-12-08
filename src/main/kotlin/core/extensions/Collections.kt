@@ -1,5 +1,9 @@
 package core.extensions
 
+data class IntCollector(var value: Int = 0)
+data class StringCollector(var value: String = "")
+data class Collector<T>(var value: T)
+
 inline fun <T, R> List<T>.collect(collector: R, crossinline action: ((R, T) -> Unit)): R {
     this.forEach { action.invoke(collector, it) }
     return collector
