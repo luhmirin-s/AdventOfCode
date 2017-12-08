@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Assertions.*
 
 internal class Day7Test {
 
-    val input = listOf(
+    private val input = listOf(
         "pbga (66)",
         "xhth (57)",
         "ebii (61)",

@@ -27,3 +27,8 @@ fun String.getLastWord(): String = this.split(' ').last()
 fun String.toListOfInts() = this.trim().split(" ").filterNot(String::isNullOrBlank).map { it.trim().toInt() }
 
 fun String.toIndex() = this.toInt() - 1
+
+inline fun <reified T : Any> List<String>.mapToPattern(
+    pattern: String,
+    crossinline mapper: (MatchGroupCollection) -> T?
+) = mapNotNull { Regex(pattern).matchEntire(it)?.groups?.let(mapper) }

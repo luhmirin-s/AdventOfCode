@@ -1,6 +1,7 @@
 package y2017.week2
 
 import core.AbstractDay
+import core.extensions.mapToPattern
 
 class Day7(input: List<String>) : AbstractDay(input) {
 
@@ -10,7 +11,7 @@ class Day7(input: List<String>) : AbstractDay(input) {
         val programs = input.toPrograms()
         val root = programs.getRoot()
 
-        val programsMap = programs.map { it.name to it.copy() }.toMap().toMutableMap()
+        val programsMap = programs.associate { it.name to it.copy() }.toMutableMap()
         replaceWeightsWithSums(programsMap, root)
 
         val unbalancedProgram = findUnbalancedProgram(programsMap, root)
@@ -25,14 +26,12 @@ class Day7(input: List<String>) : AbstractDay(input) {
 
     private data class Program(val name: String, var weight: Int, val links: List<String>)
 
-    private fun List<String>.toPrograms() = mapNotNull {
-        Regex("(.*)\\s\\((.*)\\)(\\s->\\s(.*))?").matchEntire(it)?.groups?.let {
-            Program(
-                name = it[1]?.value ?: "",
-                weight = it[2]?.value?.toInt() ?: 0,
-                links = it[4]?.value?.split(", ") ?: emptyList()
-            )
-        }
+    private fun List<String>.toPrograms() = mapToPattern("(.*)\\s\\((.*)\\)(\\s->\\s(.*))?") {
+        Program(
+            name = it[1]?.value ?: "",
+            weight = it[2]?.value?.toInt() ?: 0,
+            links = it[4]?.value?.split(", ") ?: emptyList()
+        )
     }
 
     private fun List<Program>.getRoot() = flatMap { it.links }.toSet()
