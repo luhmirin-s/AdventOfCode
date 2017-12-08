@@ -4,19 +4,15 @@ import core.AbstractDay
 
 class Day2(input: List<String>) : AbstractDay(input) {
 
-    override fun calculate(): String {
-        return input
-            .map { it.asDimension() }
-            .sumBy { it.area() }
-            .toString()
-    }
+    override fun calculate(): String = input
+        .map { it.asDimension() }
+        .sumBy { it.area() }
+        .toString()
 
-    override fun calculateAdvanced(): String {
-        return input
-            .map { it.asDimension() }
-            .sumBy { it.ribbonLength() }
-            .toString()
-    }
+    override fun calculateAdvanced(): String = input
+        .map { it.asDimension() }
+        .sumBy { it.ribbonLength() }
+        .toString()
 
     // Utils
 

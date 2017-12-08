@@ -4,23 +4,16 @@ import core.AbstractDay
 
 class Day23(input: List<String>) : AbstractDay(input) {
 
-    override fun calculate(): String {
-        return input.map { it.split(" ") }
-            .executeInstructions(mutableMapOf('a' to 7, 'b' to 0, 'c' to 0, 'd' to 0))
-            .get('a')
-            ?.toString() ?: ""
-    }
+    override fun calculate(): String = input.map { it.split(" ") }
+        .executeInstructions(mutableMapOf('a' to 7, 'b' to 0, 'c' to 0, 'd' to 0))['a']
+        ?.toString() ?: ""
 
-    override fun calculateAdvanced(): String {
-        return input.map { it.split(" ") }
-            .executeInstructions(mutableMapOf('a' to 12, 'b' to 0, 'c' to 0, 'd' to 0))
-            .get('a')
-            ?.toString() ?: ""
-    }
-
+    override fun calculateAdvanced(): String = input.map { it.split(" ") }
+        .executeInstructions(mutableMapOf('a' to 12, 'b' to 0, 'c' to 0, 'd' to 0))['a']
+        ?.toString() ?: ""
 
     private fun List<List<String>>.executeInstructions(registers: MutableMap<Char, Int>): MutableMap<Char, Int> {
-        val toggles = Array<Boolean>(this.size) { false }
+        val toggles = Array(this.size) { false }
 
         var counter = 0
         while (counter < this.size) {
@@ -79,17 +72,17 @@ class Day23(input: List<String>) : AbstractDay(input) {
             else -> tokens.secondValue()
         }
 
-        if (flag == 0) {
-            return counter + 1
+        return if (flag == 0) {
+            counter + 1
         } else {
-            return counter + distance
+            counter + distance
         }
     }
 
-    fun List<String>.command() = this[0]
-    fun List<String>.firstReg() = this[1][0]
-    fun List<String>.firstValue() = this[1].toInt()
-    fun List<String>.secondReg() = this[2][0]
-    fun List<String>.secondValue() = this[2].toInt()
+    private fun List<String>.command() = this[0]
+    private fun List<String>.firstReg() = this[1][0]
+    private fun List<String>.firstValue() = this[1].toInt()
+    private fun List<String>.secondReg() = this[2][0]
+    private fun List<String>.secondValue() = this[2].toInt()
 
 }

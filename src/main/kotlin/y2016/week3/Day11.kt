@@ -10,18 +10,14 @@ class Day11(input: List<String>) : AbstractDay(input) {
     I just translated his solution.
      */
 
-    override fun calculate(): String {
-        return input.collectState().calculateState().toString()
-    }
+    override fun calculate(): String = input.collectState().calculateState().toString()
 
-    override fun calculateAdvanced(): String {
-        return input.mapIndexed { i, s ->
-            when (i) {
-                0 -> "$s An elerium generator. An elerium-compatible microchip. A dilithium generator. A dilithium-compatible microchip."
-                else -> s
-            }
-        }.collectState().calculateState().toString()
-    }
+    override fun calculateAdvanced(): String = input.mapIndexed { i, s ->
+        when (i) {
+            0 -> "$s An elerium generator. An elerium-compatible microchip. A dilithium generator. A dilithium-compatible microchip."
+            else -> s
+        }
+    }.collectState().calculateState().toString()
 
     data class State(
         var result: Int = 0,

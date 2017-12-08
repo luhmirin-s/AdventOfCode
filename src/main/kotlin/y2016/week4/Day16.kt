@@ -7,13 +7,9 @@ import core.extensions.toIndex
 
 class Day16(input: List<String>) : AbstractDay(input) {
 
-    override fun calculate(): String {
-        return inputFirstLine.expand(272).toCheckSum()
-    }
+    override fun calculate(): String = inputFirstLine.expand(272).toCheckSum()
 
-    override fun calculateAdvanced(): String {
-        return inputFirstLine.expand(35651584).toCheckSum()
-    }
+    override fun calculateAdvanced(): String = inputFirstLine.expand(35651584).toCheckSum()
 
 
     private fun String.expand(maxLength: Int): String {

@@ -5,22 +5,18 @@ import java.util.*
 
 class Day15(input: List<String>) : AbstractDay(input) {
 
-    override fun calculate(): String {
-        return input
-            .map { it.parseIngredients() }
-            .calculateAndFilter()
-            .map { it.getTotal() }
-            .max().toString()
-    }
+    override fun calculate(): String = input
+        .map { it.parseIngredients() }
+        .calculateAndFilter()
+        .map { it.getTotal() }
+        .max().toString()
 
-    override fun calculateAdvanced(): String {
-        return input
-            .map { it.parseIngredients() }
-            .calculateAndFilter()
-            .filter { it.cal == 500 }
-            .map { it.getTotal() }
-            .max().toString()
-    }
+    override fun calculateAdvanced(): String = input
+        .map { it.parseIngredients() }
+        .calculateAndFilter()
+        .filter { it.cal == 500 }
+        .map { it.getTotal() }
+        .max().toString()
 
 
     private data class Ingredient(val cap: Int, val dur: Int, val fla: Int, val tex: Int, val cal: Int)

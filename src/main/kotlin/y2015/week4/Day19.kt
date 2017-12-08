@@ -5,27 +5,22 @@ import java.util.*
 
 class Day19(input: List<String>) : AbstractDay(input) {
 
-    val molecule = "CRnCaCaCaSiRnBPTiMgArSiRnSiRnMgArSiRnCaFArTiTiBSiThFYCaFArCaCaSiThCaPBSiThSiThCaCaPTiRnPBSiThRnFArArCaCaSiThCaSiThSiRnMgArCaPTiBPRnFArSiThCaSiRnFArBCaSiRnCaPRnFArPMgYCaFArCaPTiTiTiBPBSiThCaPTiBPBSiRnFArBPBSiRnCaFArBPRnSiRnFArRnSiRnBFArCaFArCaCaCaSiThSiThCaCaPBPTiTiRnFArCaPTiBSiAlArPBCaCaCaCaCaSiRnMgArCaSiThFArThCaSiThCaSiRnCaFYCaSiRnFYFArFArCaSiRnFYFArCaSiRnBPMgArSiThPRnFArCaSiRnFArTiRnSiRnFYFArCaSiRnBFArCaSiRnTiMgArSiThCaSiThCaFArPRnFArSiRnFArTiTiTiTiBCaCaSiRnCaCaFYFArSiThCaPTiBPTiBCaSiThSiRnMgArCaF"
+    private val molecule = "CRnCaCaCaSiRnBPTiMgArSiRnSiRnMgArSiRnCaFArTiTiBSiThFYCaFArCaCaSiThCaPBSiThSiThCaCaPTiRnPBSiThRnFArArCaCaSiThCaSiThSiRnMgArCaPTiBPRnFArSiThCaSiRnFArBCaSiRnCaPRnFArPMgYCaFArCaPTiTiTiBPBSiThCaPTiBPBSiRnFArBPBSiRnCaFArBPRnSiRnFArRnSiRnBFArCaFArCaCaCaSiThSiThCaCaPBPTiTiRnFArCaPTiBSiAlArPBCaCaCaCaCaSiRnMgArCaSiThFArThCaSiThCaSiRnCaFYCaSiRnFYFArFArCaSiRnFYFArCaSiRnBPMgArSiThPRnFArCaSiRnFArTiRnSiRnFYFArCaSiRnBFArCaSiRnTiMgArSiThCaSiThCaFArPRnFArSiRnFArTiTiTiTiBCaCaSiRnCaCaFYFArSiThCaPTiBPTiBCaSiThSiRnMgArCaF"
 
-    override fun calculate(): String {
-        return input
-            .parseReplacements()
-            .getPossibleReplacements(molecule)
-            .count()
-            .toString()
-    }
+    override fun calculate(): String = input
+        .parseReplacements()
+        .getPossibleReplacements(molecule)
+        .count()
+        .toString()
+// I cheated a bit on this
+    // https://www.reddit.com/r/adventofcode/comments/3xflz8/day_19_solutions/cy4etju
 
-    override fun calculateAdvanced(): String {
-        // I cheated a bit on this
-        // https://www.reddit.com/r/adventofcode/comments/3xflz8/day_19_solutions/cy4etju
-
-        return (
-            molecule.count { it.isUpperCase() }
-                - molecule.replace("Rn", "#").replace("Ar", "#").count { it.equals('#') }
-                - 2 * molecule.count { it.equals('Y') }
-                - 1
-            ).toString()
-    }
+    override fun calculateAdvanced(): String = (
+        molecule.count { it.isUpperCase() }
+            - molecule.replace("Rn", "#").replace("Ar", "#").count { it.equals('#') }
+            - 2 * molecule.count { it.equals('Y') }
+            - 1
+        ).toString()
 
     private fun List<String>.parseReplacements(): Map<String, MutableList<String>> {
         val replacements: MutableMap<String, MutableList<String>> = HashMap()
@@ -47,7 +42,7 @@ class Day19(input: List<String>) : AbstractDay(input) {
         val derived: MutableSet<String> = HashSet()
 
         this.entries.forEach { entry ->
-            var lastIndex = 0;
+            var lastIndex = 0
             while (lastIndex != -1) {
                 lastIndex = originalString.indexOf(entry.key, lastIndex)
 
@@ -63,8 +58,7 @@ class Day19(input: List<String>) : AbstractDay(input) {
         return derived
     }
 
-    private fun String.replaceAtIndex(index: Int, length: Int, replacement: String): String {
-        return this.substring(0, index) + replacement + this.substring(index + length, this.length)
-    }
+    private fun String.replaceAtIndex(index: Int, length: Int, replacement: String): String =
+        substring(0, index) + replacement + substring(index + length, this.length)
 
 }

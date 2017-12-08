@@ -10,20 +10,16 @@ class Day11(input: List<String>) : AbstractDay(input) {
     private val FORBIDDEN = listOf(LETTERS.indexOf('i'), LETTERS.indexOf('l'), LETTERS.indexOf('o'))
 
 
-    override fun calculate(): String {
-        return inputFirstLineChars
-            .mapToInt()
-            .findNextPassword()
-            .toFinalString()
-    }
+    override fun calculate(): String = inputFirstLineChars
+        .mapToInt()
+        .findNextPassword()
+        .toFinalString()
 
-    override fun calculateAdvanced(): String {
-        return inputFirstLineChars
-            .mapToInt()
-            .findNextPassword()
-            .findNextPassword()
-            .toFinalString()
-    }
+    override fun calculateAdvanced(): String = inputFirstLineChars
+        .mapToInt()
+        .findNextPassword()
+        .findNextPassword()
+        .toFinalString()
 
 
     private fun List<Char>.mapToInt(): MutableList<Int> = map { LETTERS.indexOf(it) }.reversed().toMutableList()

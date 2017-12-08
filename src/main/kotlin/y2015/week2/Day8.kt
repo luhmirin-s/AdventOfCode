@@ -4,10 +4,9 @@ import core.AbstractDay
 
 class Day8(input: List<String>) : AbstractDay(input) {
 
-    val CODE_PATTERN = "\\\\x[a-f0-9]{2}"
+    private val CODE_PATTERN = "\\\\x[a-f0-9]{2}"
 
     override fun calculate(): String {
-
         val countCodeChars = input.map { it.length }.sum()
         val countChars = input.map {
             it.toLowerCase()
@@ -20,7 +19,6 @@ class Day8(input: List<String>) : AbstractDay(input) {
     }
 
     override fun calculateAdvanced(): String {
-
         val initialCodeChars = input.map { it.length }.sum()
         val countCodeChars = input.map {
             it.toLowerCase()

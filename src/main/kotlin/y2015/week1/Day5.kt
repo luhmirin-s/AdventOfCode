@@ -4,19 +4,15 @@ import core.AbstractDay
 
 class Day5(input: List<String>) : AbstractDay(input) {
 
-    override fun calculate(): String {
-        return input
-            .filter { str -> str.isNice() }
-            .count()
-            .toString()
-    }
+    override fun calculate(): String = input
+        .filter { str -> str.isNice() }
+        .count()
+        .toString()
 
-    override fun calculateAdvanced(): String {
-        return input
-            .filter { str -> str.isNiceAdvanced() }
-            .count()
-            .toString()
-    }
+    override fun calculateAdvanced(): String = input
+        .filter { str -> str.isNiceAdvanced() }
+        .count()
+        .toString()
 
 
     // ===================

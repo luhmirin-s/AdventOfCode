@@ -33,7 +33,7 @@ class Day24(input: List<String>) : AbstractDay(input) {
 
     private fun Char.toNumber() = this.toInt() - 48
 
-    data class Place(val x: Int, val y: Int, val value: Char)
+    private data class Place(val x: Int, val y: Int, val value: Char)
 
     private fun List<String>.parse() = this
         .mapIndexed { y, str -> str.toCharArray().mapIndexed { x, c -> Place(x, y, c) } }
@@ -49,11 +49,12 @@ class Day24(input: List<String>) : AbstractDay(input) {
 
     private fun Place.isWall() = this.value == '#'
 
-    private fun Place.getNeighbour(direction: Int, field: List<List<Place>>) = field[this.y + dy[direction]][this.x + dx[direction]]
+    private fun Place.getNeighbour(direction: Int, field: List<List<Place>>) =
+        field[this.y + dy[direction]][this.x + dx[direction]]
 
     private fun getDistanceMap(field: List<List<Place>>, positions: Map<Int, Place>): Map<Int, Map<Int, Int>> {
         val distances = mutableMapOf<Place, MutableMap<Place, Int>>()
-        for ((key, value) in positions) distances.put(value, getDistances(value, field, positions))
+        for ((_, value) in positions) distances.put(value, getDistances(value, field, positions))
 
         return distances
             .map { it.key.value.toNumber() to it.value.map { it.key.value.toNumber() to it.value }.toMap() }
@@ -61,7 +62,7 @@ class Day24(input: List<String>) : AbstractDay(input) {
     }
 
     private fun getDistances(start: Place, field: List<List<Place>>, positions: Map<Int, Place>): MutableMap<Place, Int> {
-        val visited = mutableMapOf<Place, Int>(start to 0)
+        val visited = mutableMapOf(start to 0)
         val path = mutableListOf(start)
 
         val searchablePlaces = positions.values
@@ -87,10 +88,7 @@ class Day24(input: List<String>) : AbstractDay(input) {
 
     private fun List<List<Int>>.computeDistance(filteredDistances: Map<Int, Map<Int, Int>>): List<Int> {
         return this.map { path ->
-            var distance = 0
-            for (i in 0..path.size - 2) {
-                distance += filteredDistances[path[i]]!![path[i + 1]]!!
-            }
+            val distance = (0..path.size - 2).sumBy { filteredDistances[path[it]]!![path[it + 1]]!! }
             distance
         }
     }

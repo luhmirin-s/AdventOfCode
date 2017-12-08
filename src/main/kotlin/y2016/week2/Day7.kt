@@ -6,17 +6,13 @@ import java.util.regex.Pattern
 
 class Day7(input: List<String>) : AbstractDay(input) {
 
-    override fun calculate(): String {
-        return input.map { it.breakLines() }
-            .filter { it.hasTls() }
-            .count().toString()
-    }
+    override fun calculate(): String = input.map { it.breakLines() }
+        .filter { it.hasTls() }
+        .count().toString()
 
-    override fun calculateAdvanced(): String {
-        return input.map { it.breakLines() }
-            .filter { it.hasSsl() }
-            .count().toString()
-    }
+    override fun calculateAdvanced(): String = input.map { it.breakLines() }
+        .filter { it.hasSsl() }
+        .count().toString()
 
 
     private data class BrokenLine(val ips: List<String>, val hypers: List<String>)
@@ -51,7 +47,7 @@ class Day7(input: List<String>) : AbstractDay(input) {
         val allMatches = mutableSetOf<String>()
         val pattern = Pattern.compile("(.).\\1").matcher(this)
 
-        for (i in 0..this.length - 1) {
+        for (i in 0 until this.length) {
             for (j in i + 1..this.length) {
                 pattern.region(i, j)
                 if (pattern.find()) allMatches.add(pattern.group())

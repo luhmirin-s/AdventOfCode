@@ -5,13 +5,11 @@ import core.extensions.getSumPermutationSet
 
 class Day17(input: List<String>) : AbstractDay(input) {
 
-    override fun calculate(): String {
-        return input
-            .map { it.toInt() }
-            .getSumPermutationSet(150)
-            .count()
-            .toString()
-    }
+    override fun calculate(): String = input
+        .map { it.toInt() }
+        .getSumPermutationSet(150)
+        .count()
+        .toString()
 
     override fun calculateAdvanced(): String {
         val sumSet = input

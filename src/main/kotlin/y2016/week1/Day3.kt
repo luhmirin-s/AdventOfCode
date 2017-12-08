@@ -5,17 +5,14 @@ import core.AbstractDay
 import core.extensions.toListOfInts
 
 class Day3(input: List<String>) : AbstractDay(input) {
-    override fun calculate(): String {
-        return input.map(String::toListOfInts)
-            .filter { it.isValidTriangle() }
-            .count().toString()
-    }
 
-    override fun calculateAdvanced(): String {
-        return input.map(String::toListOfInts).switchRowsToColumns()
-            .filter { it.isValidTriangle() }
-            .count().toString()
-    }
+    override fun calculate(): String = input.map(String::toListOfInts)
+        .filter { it.isValidTriangle() }
+        .count().toString()
+
+    override fun calculateAdvanced(): String = input.map(String::toListOfInts).switchRowsToColumns()
+        .filter { it.isValidTriangle() }
+        .count().toString()
 
     private fun List<Int>.isValidTriangle() =
         valid(this[0], this[1], this[2])

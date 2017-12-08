@@ -5,13 +5,9 @@ import core.extensions.toIndex
 
 class Day18(input: List<String>) : AbstractDay(input) {
 
-    override fun calculate(): String {
-        return inputFirstLine.getCountOfSafeTiles(40).toString()
-    }
+    override fun calculate(): String = inputFirstLine.getCountOfSafeTiles(40).toString()
 
-    override fun calculateAdvanced(): String {
-        return inputFirstLine.getCountOfSafeTiles(400000).toString()
-    }
+    override fun calculateAdvanced(): String = inputFirstLine.getCountOfSafeTiles(400000).toString()
 
 
     private fun String.toTileArray() = this.toCharArray().map { it == '.' }
@@ -22,7 +18,7 @@ class Day18(input: List<String>) : AbstractDay(input) {
 
         var previousRow = this.toTileArray()
 
-        (1..size).forEach { index ->
+        (1..size).forEach {
             val newRow = mutableListOf<Boolean>()
 
             (0..rowLength).forEach { i ->

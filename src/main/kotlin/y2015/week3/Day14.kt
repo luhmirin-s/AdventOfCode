@@ -4,19 +4,15 @@ import core.AbstractDay
 
 class Day14(input: List<String>) : AbstractDay(input) {
 
-    override fun calculate(): String {
-        return input.parseReindeer()
-            .calculateMovement(2503)
-            .map { it.distance }
-            .max().toString()
-    }
+    override fun calculate(): String = input.parseReindeer()
+        .calculateMovement(2503)
+        .map { it.distance }
+        .max().toString()
 
-    override fun calculateAdvanced(): String {
-        return input.parseReindeer()
-            .calculateMovement(2503)
-            .map { it.points }
-            .max().toString()
-    }
+    override fun calculateAdvanced(): String = input.parseReindeer()
+        .calculateMovement(2503)
+        .map { it.points }
+        .max().toString()
 
 
     private data class Reindeer(val name: String, val speed: Int, val moveTime: Int, val restTime: Int)
@@ -32,15 +28,17 @@ class Day14(input: List<String>) : AbstractDay(input) {
     private fun List<Movement>.calculateMovement(time: Int): List<Movement> {
         for (second in 1..time) {
             this.forEach {
-                if (it.movesFor < it.deer.moveTime) {
-                    it.movesFor++
-                    it.distance += it.deer.speed
-                } else if (it.restsFor < it.deer.restTime) {
-                    it.restsFor++
-                } else {
-                    it.distance += it.deer.speed
-                    it.movesFor = 1
-                    it.restsFor = 0
+                when {
+                    it.movesFor < it.deer.moveTime -> {
+                        it.movesFor++
+                        it.distance += it.deer.speed
+                    }
+                    it.restsFor < it.deer.restTime -> it.restsFor++
+                    else -> {
+                        it.distance += it.deer.speed
+                        it.movesFor = 1
+                        it.restsFor = 0
+                    }
                 }
             }
 

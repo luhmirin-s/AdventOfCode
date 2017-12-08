@@ -45,9 +45,9 @@ class Day3(input: List<String>) : AbstractDay(input) {
 
     // Utils
 
-    data class Coord(val x: Int, val y: Int)
+    private data class Coord(val x: Int, val y: Int)
 
-    fun Coord.move(direction: Char): Coord = when (direction) {
+    private fun Coord.move(direction: Char): Coord = when (direction) {
         '^' -> Coord(x, y + 1)
         'v' -> Coord(x, y - 1)
         '>' -> Coord(x + 1, y)

@@ -27,7 +27,7 @@ class Day23(input: List<String>) : AbstractDay(input) {
         return registers['b'].toString()
     }
 
-    private fun String.toInstruction(): Instruction = Instruction(tokens = this.split(' '));
+    private fun String.toInstruction(): Instruction = Instruction(tokens = this.split(' '))
 
     private data class Instruction(var tokens: List<String>)
 

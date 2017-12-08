@@ -6,7 +6,6 @@ import core.extensions.joinWithoutSpaces
 class Day25(input: List<String>) : AbstractDay(input) {
 
     override fun calculate(): String {
-
         for (i in 0..1000) {
             val output = input.map { it.split(" ") }
                 .executeInstructions(mutableMapOf('a' to i, 'b' to 0, 'c' to 0, 'd' to 0))
@@ -82,17 +81,17 @@ class Day25(input: List<String>) : AbstractDay(input) {
             else -> tokens.secondValue()
         }
 
-        if (flag == 0) {
-            return counter + 1
+        return if (flag == 0) {
+            counter + 1
         } else {
-            return counter + distance
+            counter + distance
         }
     }
 
-    fun List<String>.command() = this[0]
-    fun List<String>.firstReg() = this[1][0]
-    fun List<String>.firstValue() = this[1].toInt()
-    fun List<String>.secondReg() = this[2][0]
-    fun List<String>.secondValue() = this[2].toInt()
+    private fun List<String>.command() = this[0]
+    private fun List<String>.firstReg() = this[1][0]
+    private fun List<String>.firstValue() = this[1].toInt()
+    private fun List<String>.secondReg() = this[2][0]
+    private fun List<String>.secondValue() = this[2].toInt()
 
 }

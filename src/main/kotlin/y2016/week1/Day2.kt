@@ -4,6 +4,7 @@ import core.AbstractDay
 
 
 class Day2(input: List<String>) : AbstractDay(input) {
+
     override fun calculate(): String {
         var result = ""
         var btm = SquareButton(5)
@@ -26,7 +27,7 @@ class Day2(input: List<String>) : AbstractDay(input) {
         return result
     }
 
-    data class SquareButton(val value: Int) {
+    private data class SquareButton(val value: Int) {
         /*
          1 2 3
          4 5 6
@@ -51,7 +52,7 @@ class Day2(input: List<String>) : AbstractDay(input) {
 
     }
 
-    data class RombButton(val value: Int) {
+    private data class RombButton(val value: Int) {
         /*
             1
           2 3 4

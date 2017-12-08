@@ -17,13 +17,9 @@ class Day22(input: List<String>) : AbstractDay(input) {
 
     private var nodes: Queue<Node> = LinkedList()
 
-    override fun calculate(): String {
-        return iterateGame()
-    }
+    override fun calculate(): String = iterateGame()
 
-    override fun calculateAdvanced(): String {
-        return iterateGame(true)
-    }
+    override fun calculateAdvanced(): String = iterateGame(true)
 
 
     private data class Node(

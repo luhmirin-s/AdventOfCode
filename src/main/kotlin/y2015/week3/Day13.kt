@@ -26,7 +26,11 @@ class Day13(input: List<String>) : AbstractDay(input) {
         input.forEach { str ->
             val tokens = str.split(" ")
             names.add(tokens[0])
-            happinessChanges.add(Happiness(tokens[0], tokens[10].removeSuffix("."), tokens[2].toSign() * tokens[3].toIntOrElse(0)))
+            happinessChanges.add(Happiness(
+                who = tokens[0],
+                neighbour = tokens[10].removeSuffix("."),
+                change = tokens[2].toSign() * tokens[3].toIntOrElse(0)
+            ))
         }
         // plugging "me" in
         names.toList().forEach {
@@ -53,23 +57,27 @@ class Day13(input: List<String>) : AbstractDay(input) {
             val changes: MutableList<Int> = ArrayList()
             nameSequence.forEachIndexed { i, name ->
                 // add to changes one before and one after current
-                if (i == 0) {
-                    // handle first
-                    changes.add(happinessChanges.findHappinessChange(name, nameSequence[nameSequence.size - 1]))
-                    changes.add(happinessChanges.findHappinessChange(name, nameSequence[1]))
-                } else if (i == nameSequence.size - 1) {
-                    // handle last
-                    changes.add(happinessChanges.findHappinessChange(name, nameSequence[i - 1]))
-                    changes.add(happinessChanges.findHappinessChange(name, nameSequence[0]))
-                } else {
-                    // handle middle
-                    changes.add(happinessChanges.findHappinessChange(name, nameSequence[i - 1]))
-                    changes.add(happinessChanges.findHappinessChange(name, nameSequence[i + 1]))
+                when (i) {
+                    0 -> {
+                        // handle first
+                        changes.add(happinessChanges.findHappinessChange(name, nameSequence[nameSequence.size - 1]))
+                        changes.add(happinessChanges.findHappinessChange(name, nameSequence[1]))
+                    }
+                    nameSequence.size - 1 -> {
+                        // handle last
+                        changes.add(happinessChanges.findHappinessChange(name, nameSequence[i - 1]))
+                        changes.add(happinessChanges.findHappinessChange(name, nameSequence[0]))
+                    }
+                    else -> {
+                        // handle middle
+                        changes.add(happinessChanges.findHappinessChange(name, nameSequence[i - 1]))
+                        changes.add(happinessChanges.findHappinessChange(name, nameSequence[i + 1]))
+                    }
                 }
             }
             changes.sum()
         }
 
     private fun List<Happiness>.findHappinessChange(name: String, neighbour: String) =
-        first { it.who.equals(name) && it.neighbour.equals(neighbour) }.change
+        first { it.who == name && it.neighbour == neighbour }.change
 }

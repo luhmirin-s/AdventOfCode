@@ -4,15 +4,11 @@ import core.AbstractDay
 
 class Day9(input: List<String>) : AbstractDay(input) {
 
-    override fun calculate(): String {
-        return inputFirstLine.decompressedSize().toString()
-    }
+    override fun calculate(): String = inputFirstLine.decompressedSize().toString()
 
-    override fun calculateAdvanced(): String {
-        return inputFirstLine.recursiveDecompressedSize().toString()
-    }
+    override fun calculateAdvanced(): String = inputFirstLine.recursiveDecompressedSize().toString()
 
-    fun String.decompressedSize(): Long {
+    private fun String.decompressedSize(): Long {
         var newLineSize = 0L
         var i = 0
         while (i < this.length) {
@@ -30,7 +26,7 @@ class Day9(input: List<String>) : AbstractDay(input) {
     }
 
 
-    fun String.recursiveDecompressedSize(): Long {
+    private fun String.recursiveDecompressedSize(): Long {
         var newLineSize = 0L
         var i = 0
         while (i < this.length) {
@@ -58,7 +54,7 @@ class Day9(input: List<String>) : AbstractDay(input) {
 
     data class Token(val count: Int, val times: Int, val length: Int)
 
-    fun String.toToken(): Token {
+    private fun String.toToken(): Token {
         val values = this.split(Regex("[\\(\\)x]")).filter(String::isNotEmpty).map(String::toInt)
         return Token(values[0], values[1], this.length)
     }

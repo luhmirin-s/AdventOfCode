@@ -6,7 +6,7 @@ import core.extensions.isOdd
 
 class Day13(input: List<String>) : AbstractDay(input) {
 
-    val MAX_SIZE = 1000
+    private val MAX_SIZE = 1000
 
     override fun calculate(): String {
         val salt = inputFirstLine.toInt()

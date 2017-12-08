@@ -6,22 +6,20 @@ import core.extensions.toIndex
 
 class Day8(input: List<String>) : AbstractDay(input) {
 
-    companion object {
+    private companion object {
         private val MAX_COLUMNS = 50
         private val LAST_COLUMN = MAX_COLUMNS.toIndex()
         private val MAX_ROWS = 6
         private val LAST_ROW = MAX_ROWS.toIndex()
     }
 
-    override fun calculate(): String {
-        return input.map { it.toCommand() }
-            .collect(newScreen(), { screen, command -> command.exec(screen) })
-            .toList()
-            .flatMap { it.toList() }
-            .filter { it }
-            .count()
-            .toString()
-    }
+    override fun calculate(): String = input.map { it.toCommand() }
+        .collect(newScreen(), { screen, command -> command.exec(screen) })
+        .toList()
+        .flatMap { it.toList() }
+        .filter { it }
+        .count()
+        .toString()
 
     override fun calculateAdvanced(): String {
         val screen = input
@@ -37,7 +35,7 @@ class Day8(input: List<String>) : AbstractDay(input) {
         return "-1"
     }
 
-    private fun newScreen() = Array<Array<Boolean>>(MAX_COLUMNS, { Array<Boolean>(MAX_ROWS, { false }) })
+    private fun newScreen() = Array(MAX_COLUMNS, { Array(MAX_ROWS, { false }) })
 
     private fun String.toCommand(): Command {
         val tokens = this.split(" ")
@@ -56,7 +54,7 @@ class Day8(input: List<String>) : AbstractDay(input) {
         }
     }
 
-    private sealed class Command() {
+    private sealed class Command {
         abstract fun exec(screen: Array<Array<Boolean>>)
 
         class TurnOn(val rows: Int, val cols: Int) : Command() {
@@ -69,7 +67,7 @@ class Day8(input: List<String>) : AbstractDay(input) {
 
         class RotateRow(val row: Int, val by: Int) : Command() {
             override fun exec(screen: Array<Array<Boolean>>) {
-                (0..(by.toIndex())).forEach { times ->
+                (0..(by.toIndex())).forEach {
                     val lastValue = screen[LAST_COLUMN][row]
                     (LAST_COLUMN downTo 1).forEach { c -> screen[c][row] = screen[c.toIndex()][row] }
                     screen[0][row] = lastValue
@@ -79,7 +77,7 @@ class Day8(input: List<String>) : AbstractDay(input) {
 
         class RotateColumn(val column: Int, val by: Int) : Command() {
             override fun exec(screen: Array<Array<Boolean>>) {
-                (0..(by.toIndex())).forEach { times ->
+                (0..(by.toIndex())).forEach {
                     val lastValue = screen[column][LAST_ROW]
                     (LAST_ROW downTo 1).forEach { r -> screen[column][r] = screen[column][r.toIndex()] }
                     screen[column][0] = lastValue

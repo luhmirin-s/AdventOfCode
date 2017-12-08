@@ -12,26 +12,26 @@ class Day7(input: List<String>) : AbstractDay(input) {
 
     override fun calculateAdvanced(): String {
         val commands = input.parse().sort()
-        val valueA = commands.resolve().get(RESULT_WIRE)
+        val valueA = commands.resolve()[RESULT_WIRE]
 
         val newCommands = commands
             .filter { command -> command.gate != Gate.IN || !command.resultWire.contentEquals(NEW_INPUT_WIRE) }
             .toMutableList()
-        newCommands.add(Command(NEW_INPUT_WIRE, arrayOf(valueA.toString()), Gate.IN))
+        newCommands.add(Command(NEW_INPUT_WIRE, listOf(valueA.toString()), Gate.IN))
 
         return newCommands.sort().resolve()[RESULT_WIRE].toString()
     }
 
 
-    enum class Gate { OR, AND, LSHIFT, RSHIFT, NOT, IN }
-    data class Command(val resultWire: String, val inputWires: Array<String>, val gate: Gate)
+    private enum class Gate { OR, AND, LSHIFT, RSHIFT, NOT, IN }
+    private data class Command(val resultWire: String, val inputWires: List<String>, val gate: Gate)
 
-    fun Command.first() = inputWires[0]
+    private fun Command.first() = inputWires[0]
 
-    fun Command.second() = inputWires[1]
+    private fun Command.second() = inputWires[1]
 
 
-    fun Int.not() = xor(0b1111111111111111)
+    private fun Int.not() = xor(0b1111111111111111)
 
     private fun Int.trimToShort() = this % 0b1111111111111111
 
@@ -42,70 +42,58 @@ class Day7(input: List<String>) : AbstractDay(input) {
         this[key] ?: throw RuntimeException("no item in map")
     }
 
-    fun HashMap<String, Int>.containsOrIsNumber(key: String): Boolean {
-        try {
-            key.toInt()
-            return true
-        } catch (e: NumberFormatException) {
-            return this.containsKey(key)
-        }
+    private fun HashMap<String, Int>.containsOrIsNumber(key: String) = try {
+        key.toInt()
+        true
+    } catch (e: NumberFormatException) {
+        this.containsKey(key)
     }
 
 
-    fun List<String>.parse(): MutableList<Command> {
+    private fun List<String>.parse(): MutableList<Command> {
         return this.map { str ->
             val inputOtputTokens = str.split(" -> ")
 
             val resultWire = inputOtputTokens[1]
             val inputTokens = inputOtputTokens[0].split(" ")
 
-            val inputWires: Array<String>
+            val inputWires: List<String>
             val gate: Gate
 
             when (inputTokens.size) {
                 2 -> {
-                    inputWires = arrayOf(inputTokens[1])
+                    inputWires = listOf(inputTokens[1])
                     gate = Gate.NOT
                 }
                 3 -> {
-                    inputWires = arrayOf(inputTokens[0], inputTokens[2])
+                    inputWires = listOf(inputTokens[0], inputTokens[2])
                     gate = Gate.valueOf(inputTokens[1])
                 }
                 else -> {
-                    inputWires = arrayOf(inputTokens[0].trim())
+                    inputWires = listOf(inputTokens[0].trim())
                     gate = Gate.IN
                 }
             }
-            Command(resultWire, inputWires, gate);
+            Command(resultWire, inputWires, gate)
         }.toMutableList()
     }
 
-    fun MutableList<Command>.sort(): MutableList<Command> {
-        return this.sortedWith(Comparator { first, second ->
-            if (first.gate == second.gate)
-                return@Comparator 0
-            else if (first.gate == Gate.IN)
-                return@Comparator -1
-            else if (second.gate == Gate.IN)
-                return@Comparator 1
-            else if (first.gate == Gate.NOT)
-                return@Comparator -1
-            else if (second.gate == Gate.NOT)
-                return@Comparator 1
-            else if (first.gate == Gate.LSHIFT)
-                return@Comparator -1
-            else if (second.gate == Gate.LSHIFT)
-                return@Comparator 1
-            else if (first.gate == Gate.RSHIFT)
-                return@Comparator -1
-            else if (second.gate == Gate.RSHIFT)
-                return@Comparator 1
-            else
-                return@Comparator 0
-        }).toMutableList()
-    }
+    private fun MutableList<Command>.sort(): MutableList<Command> = this.sortedWith(Comparator { first, second ->
+        when {
+            first.gate == second.gate -> return@Comparator 0
+            first.gate == Gate.IN -> return@Comparator -1
+            second.gate == Gate.IN -> return@Comparator 1
+            first.gate == Gate.NOT -> return@Comparator -1
+            second.gate == Gate.NOT -> return@Comparator 1
+            first.gate == Gate.LSHIFT -> return@Comparator -1
+            second.gate == Gate.LSHIFT -> return@Comparator 1
+            first.gate == Gate.RSHIFT -> return@Comparator -1
+            second.gate == Gate.RSHIFT -> return@Comparator 1
+            else -> return@Comparator 0
+        }
+    }).toMutableList()
 
-    fun MutableList<Command>.resolve(): Map<String, Int> {
+    private fun MutableList<Command>.resolve(): Map<String, Int> {
         val results = HashMap<String, Int>()
 
         val unresolved = ArrayList<Command>()

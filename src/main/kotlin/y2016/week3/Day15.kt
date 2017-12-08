@@ -4,10 +4,7 @@ import core.AbstractDay
 
 class Day15(input: List<String>) : AbstractDay(input) {
 
-    override fun calculate(): String {
-        val disks = input.toDisks()
-        return findSuccessPosition(disks).toString()
-    }
+    override fun calculate(): String = input.toDisks().let {findSuccessPosition(it)}.toString()
 
     override fun calculateAdvanced(): String {
         val originalDisks = input.toDisks().toMutableList()

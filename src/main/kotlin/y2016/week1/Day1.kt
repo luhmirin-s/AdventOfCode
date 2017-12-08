@@ -5,17 +5,15 @@ import core.extensions.collect
 
 class Day1(input: List<String>) : AbstractDay(input) {
 
-    override fun calculate(): String {
-        return inputFirstLine.split(", ").map { it.toStep() }
-            .collect(Position(0, Point(0, 0)), Position::move)
-            .currentPoint.getDistanceToZero().toString()
-    }
+    override fun calculate(): String = inputFirstLine.split(", ")
+        .map { it.toStep() }
+        .collect(Position(0, Point(0, 0)), Position::move)
+        .currentPoint.getDistanceToZero().toString()
 
-    override fun calculateAdvanced(): String {
-        return inputFirstLine.split(", ").map { it.toStep() }
-            .collect(Position(0, Point(0, 0)), Position::move)
-            .firstCrossPoint?.getDistanceToZero().toString()
-    }
+    override fun calculateAdvanced(): String = inputFirstLine.split(", ")
+        .map { it.toStep() }
+        .collect(Position(0, Point(0, 0)), Position::move)
+        .firstCrossPoint?.getDistanceToZero().toString()
 
     private data class Step(val direction: Char, val distance: Int)
 

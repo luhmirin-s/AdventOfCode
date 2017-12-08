@@ -8,7 +8,7 @@ class Day21(input: List<String>) : AbstractDay(input) {
     override fun calculate(): String {
         val boss = input.parseBoss()
 
-        return ITEM_SETS()
+        return itemSets()
             .filter {
                 var turnsToKillBoss = boss.hp / getTotalDamage(it.dmg, boss.def)
                 if (boss.hp % getTotalDamage(it.dmg, boss.def) != 0) turnsToKillBoss++
@@ -20,7 +20,7 @@ class Day21(input: List<String>) : AbstractDay(input) {
     override fun calculateAdvanced(): String {
         val boss = input.parseBoss()
 
-        return ITEM_SETS()
+        return itemSets()
             .filter {
                 (100 / getTotalDamage(boss.dmg, it.def)) * getTotalDamage(it.dmg, boss.def) < boss.hp
             }.maxBy { it.cost }
@@ -58,21 +58,21 @@ class Day21(input: List<String>) : AbstractDay(input) {
         Item(102, 0, 5)
     )
 
-    private fun RING_PAIRS(): Set<Item> {
+    private fun ringPairs(): Set<Item> {
         val list: MutableSet<Item> = HashSet()
-        val ATTACK_RINGS = setOf(
+        val attackRings = setOf(
             Item(0, 0, 0), //none
             Item(25, 1, 0),
             Item(50, 2, 0),
             Item(100, 3, 0)
         )
-        val ARMOR_RING = setOf(
+        val armorRings = setOf(
             Item(0, 0, 0), //none
             Item(20, 0, 1),
             Item(40, 0, 2),
             Item(80, 0, 3)
         )
-        val allRings = ATTACK_RINGS.plus(ARMOR_RING)
+        val allRings = attackRings.plus(armorRings)
         allRings.forEach { first ->
             allRings.forEach { second ->
                 if (first != second) list.add(first.combine(second))
@@ -82,9 +82,9 @@ class Day21(input: List<String>) : AbstractDay(input) {
         return list
     }
 
-    private fun ITEM_SETS(): Set<Item> {
+    private fun itemSets(): Set<Item> {
         val list: MutableSet<Item> = HashSet()
-        RING_PAIRS().forEach { r ->
+        ringPairs().forEach { r ->
             WEAPONS.forEach { w ->
                 ARMORS.forEach { a ->
                     list.add(w.combine(a).combine(r))

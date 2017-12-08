@@ -33,37 +33,37 @@ class Day6(input: List<String>) : AbstractDay(input) {
     }
 
 
-    enum class Action { ON, OFF, TOGGLE }
+    private enum class Action { ON, OFF, TOGGLE }
 
-    class Grid {
+    private class Grid {
 
         var grid: Array<Int> = Array(1000 * 1000, { 0 })
 
-        fun turnOn(range: BulbRange): Unit {
+        fun turnOn(range: BulbRange) {
             applyToRange(range) { grid[it] = 1 }
         }
 
-        fun turnOff(range: BulbRange): Unit {
+        fun turnOff(range: BulbRange) {
             applyToRange(range) { grid[it] = 0 }
         }
 
-        fun toggle(range: BulbRange): Unit {
+        fun toggle(range: BulbRange) {
             applyToRange(range) { if (grid[it] == 1) grid[it] = 0 else grid[it] = 1 }
         }
 
-        fun turnUp(range: BulbRange): Unit {
+        fun turnUp(range: BulbRange) {
             applyToRange(range) { grid[it]++ }
         }
 
-        fun turnDown(range: BulbRange): Unit {
+        fun turnDown(range: BulbRange) {
             applyToRange(range) { if (grid[it] > 0) grid[it]-- else grid[it] = 0 }
         }
 
-        fun turnUpDouble(range: BulbRange): Unit {
+        fun turnUpDouble(range: BulbRange) {
             applyToRange(range) { grid[it] = grid[it] + 2 }
         }
 
-        fun applyToRange(range: BulbRange, func: (index: Int) -> Unit): Unit {
+        fun applyToRange(range: BulbRange, func: (index: Int) -> Unit) {
             for (currentY in range.startY..range.endY)
                 for (currentX in range.startX..range.endX)
                     func(currentY * 1000 + currentX)
@@ -71,9 +71,9 @@ class Day6(input: List<String>) : AbstractDay(input) {
     }
 
 
-    data class Command(val action: Action, val range: BulbRange)
+    private data class Command(val action: Action, val range: BulbRange)
 
-    fun String.toCommand(): Command = when {
+    private fun String.toCommand(): Command = when {
         startsWith("toggle") -> {
             val range = this.substring(6).toBulbRange()
             Command(Action.TOGGLE, range)
@@ -89,7 +89,7 @@ class Day6(input: List<String>) : AbstractDay(input) {
     }
 
 
-    data class BulbRange(val startX: Int, val endX: Int, val startY: Int, val endY: Int)
+    private data class BulbRange(val startX: Int, val endX: Int, val startY: Int, val endY: Int)
 
     private fun String.toBulbRange(): BulbRange {
         val items = this.trim().split(' ')

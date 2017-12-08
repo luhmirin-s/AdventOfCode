@@ -18,9 +18,7 @@ class Day25(input: List<String>) : AbstractDay(input) {
         return calculateCode(maxColumn, maxRow).toString()
     }
 
-    override fun calculateAdvanced(): String {
-        return "(party)"
-    }
+    override fun calculateAdvanced(): String = "(party)"
 
     private fun calculateCode(targetColumn: Int, targetRow: Int): Long {
         var value = 20151125L

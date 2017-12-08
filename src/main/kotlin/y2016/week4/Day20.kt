@@ -7,22 +7,18 @@ class Day20(input: List<String>) : AbstractDay(input) {
 
     val MAX = 4294967295L
 
-    override fun calculate(): String {
-        return input.parseLines()
-            .removeOverlaps()
-            .mergeAdjacent()
-            .filter { !it.isStart }
-            .first().let { it.position + 1 }
-            .toString()
-    }
+    override fun calculate(): String = (input.parseLines()
+        .removeOverlaps()
+        .mergeAdjacent()
+        .first { !it.isStart }
+        .position + 1)
+        .toString()
 
-    override fun calculateAdvanced(): String {
-        return input.parseLines()
-            .removeOverlaps()
-            .mergeAdjacent()
-            .countGaps()
-            .toString()
-    }
+    override fun calculateAdvanced(): String = input.parseLines()
+        .removeOverlaps()
+        .mergeAdjacent()
+        .countGaps()
+        .toString()
 
 
     data class Border(val isStart: Boolean, val position: Long)

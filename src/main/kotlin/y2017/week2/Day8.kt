@@ -1,9 +1,7 @@
 package y2017.week2
 
 import core.AbstractDay
-import core.extensions.IntCollector
-import core.extensions.collect
-import core.extensions.mapToPattern
+import core.extensions.*
 
 private data class Condition(val reg: String, val sign: String, val value: Int)
 private data class Command(val reg: String, val isInc: Boolean, val value: Int, val cond: Condition)
@@ -32,13 +30,13 @@ class Day8(input: List<String>) : AbstractDay(input) {
 
     private fun List<String>.toCommands() = mapToPattern("(.*)\\s(.{3})\\s(.*)\\sif\\s(.*)\\s(.*)\\s(.*)") {
         Command(
-            reg = it[1]?.value ?: "",
-            isInc = it[2]?.value?.equals("inc") ?: false,
-            value = it[3]?.value?.toInt() ?: 0,
+            reg = it.getString(1),
+            isInc = it.getBoolean(2) { it == "inc" },
+            value = it.getInt(3),
             cond = Condition(
-                reg = it[4]?.value ?: "",
-                sign = it[5]?.value ?: "==",
-                value = it[6]?.value?.toInt() ?: 0
+                reg = it.getString(4),
+                sign = it.getString(5,"=="),
+                value = it.getInt(6)
             )
         )
     }

@@ -9,21 +9,17 @@ class Day14(input: List<String>) : AbstractDay(input) {
     Indices are messed up for some reason and I spent too much time to care anymore :(
     Finding codes is at least correct
      */
-    override fun calculate(): String {
-        return findCodes(inputFirstLine)
-            .sortedWith(compareBy { it.second })[62]
-            .second.toString()
-    }
+    override fun calculate(): String = findCodes(inputFirstLine)
+        .sortedWith(compareBy { it.second })[62]
+        .second.toString()
 
-    override fun calculateAdvanced(): String {
-        return findCodes(inputFirstLine, 2016)
-            .sortedWith(compareBy { it.second })[66]
-            .second.toString()
-    }
+    override fun calculateAdvanced(): String = findCodes(inputFirstLine, 2016)
+        .sortedWith(compareBy { it.second })[66]
+        .second.toString()
 
 
-    val TRIPLET = Regex("(.)\\1\\1")
-    val FIVER = Regex("(.)\\1\\1\\1\\1")
+    private val TRIPLET = Regex("(.)\\1\\1")
+    private val FIVER = Regex("(.)\\1\\1\\1\\1")
 
     private fun findCodes(salt: String, stretchTimes: Int = 0): MutableList<Pair<Char, Int>> {
         val potentialCodes = mutableListOf<Pair<Char, Int>>()
@@ -51,7 +47,7 @@ class Day14(input: List<String>) : AbstractDay(input) {
 
     private fun makeHash(start: String, stretchTimes: Int): String {
         var result = start.md5Hex()
-        (0..stretchTimes - 1).forEach { result = result.md5Hex() }
+        (0 until stretchTimes).forEach { result = result.md5Hex() }
         return result
     }
 }

@@ -23,7 +23,7 @@ class Day10(input: List<String>) : AbstractDay(input) {
         var currentChar = line[0]
         var counter = 1
 
-        for (j in 1..line.length - 1) {
+        for (j in 1 until line.length) {
             if (line[j] == currentChar)
                 counter++
             else {

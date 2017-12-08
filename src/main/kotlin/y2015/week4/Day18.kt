@@ -17,19 +17,15 @@ class Day18(input: List<String>) : AbstractDay(input) {
     private val CORNER_3 = SIZE * SIZE - SIZE
     private val CORNER_4 = SIZE * SIZE - 1
 
-    override fun calculate(): String {
-        return input.toBooleanList()
-            .iterateSteps(100, false)
-            .count { it }
-            .toString()
-    }
+    override fun calculate(): String = input.toBooleanList()
+        .iterateSteps(100, false)
+        .count { it }
+        .toString()
 
-    override fun calculateAdvanced(): String {
-        return input.toBooleanList()
-            .iterateSteps(100, true)
-            .count { it }
-            .toString()
-    }
+    override fun calculateAdvanced(): String = input.toBooleanList()
+        .iterateSteps(100, true)
+        .count { it }
+        .toString()
 
 
     private fun List<String>.toBooleanList()
@@ -37,7 +33,7 @@ class Day18(input: List<String>) : AbstractDay(input) {
 
     private fun List<Boolean>.iterateSteps(steps: Int, advanced: Boolean): List<Boolean> {
         var currentStep = this.lightCorners(advanced)
-        for (i in 0..steps - 1) currentStep = currentStep.computeStep().lightCorners(advanced)
+        for (i in 0 until steps) currentStep = currentStep.computeStep().lightCorners(advanced)
         return currentStep
     }
 

@@ -1,6 +1,8 @@
 package y2017.week2
 
 import core.AbstractDay
+import core.extensions.getInt
+import core.extensions.getString
 import core.extensions.mapToPattern
 
 class Day7(input: List<String>) : AbstractDay(input) {
@@ -28,9 +30,9 @@ class Day7(input: List<String>) : AbstractDay(input) {
 
     private fun List<String>.toPrograms() = mapToPattern("(.*)\\s\\((.*)\\)(\\s->\\s(.*))?") {
         Program(
-            name = it[1]?.value ?: "",
-            weight = it[2]?.value?.toInt() ?: 0,
-            links = it[4]?.value?.split(", ") ?: emptyList()
+            name = it.getString(1),
+            weight = it.getInt(2),
+            links = it.getString(4).split(", ")
         )
     }
 
