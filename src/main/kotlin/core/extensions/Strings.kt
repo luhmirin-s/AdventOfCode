@@ -27,3 +27,5 @@ fun String.getLastWord(): String = this.split(' ').last()
 fun String.toListOfInts() = this.trim().split(" ").filterNot(String::isNullOrBlank).map { it.trim().toInt() }
 
 fun String.toIndex() = this.toInt() - 1
+
+fun String.toCharList() = toCharArray().toList()
