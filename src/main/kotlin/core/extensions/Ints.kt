@@ -21,4 +21,4 @@ fun Int.getAllDivisors(divisors: MutableSet<Int>) {
 
 fun Int.toIndex() = this - 1
 
-fun Int.incLooping(size: Int) = (this + 1) % size
+fun Int.incLooping(size: Int, step: Int = 1) = (this + step) % size

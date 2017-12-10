@@ -38,15 +38,18 @@ class Day9(input: List<String>) : AbstractDay(input) {
                 i++
             }
         }
-    }.filter { it == '{' || it == '}' }
+    }
 
     private fun List<Char>.getScore(): Int {
         var depth = 0
         return this.collect(IntCollector(0)) { i, c ->
-            if (c == '{') {
-                depth++
-                i.value += depth
-            } else depth--
+            when (c) {
+                '{' -> {
+                    depth++
+                    i.value += depth
+                }
+                '}' -> depth--
+            }
         }.value
     }
 
