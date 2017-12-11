@@ -1,11 +1,9 @@
 package y2017.week1
 
 import core.AbstractDay
+import core.extensions.*
 import kotlin.math.absoluteValue
 
-private typealias Point = Pair<Int, Int>
-private typealias Cell = Pair<Point, Int>
-private typealias Cells = Map<Point, Int>
 
 class Day3(input: List<String>) : AbstractDay(input) {
 
@@ -18,13 +16,6 @@ class Day3(input: List<String>) : AbstractDay(input) {
         .let { getCells(it) { cells, c, _ -> cells.getSumOfNeighbours(c.first, c.second) } }
         .second
         .toString()
-
-    private enum class Direction(val dx: Int, val dy: Int) {
-        LEFT(1, 0),
-        UP(0, 1),
-        RIGHT(-1, 0),
-        DOWN(0, -1)
-    }
 
     private inline fun getCells(
         maxValue: Int,
@@ -55,18 +46,5 @@ class Day3(input: List<String>) : AbstractDay(input) {
 
         throw RuntimeException("range too small")
     }
-
-    private fun Cells.getSumOfNeighbours(x: Int, y: Int): Int = listOfNotNull(
-        getCellValueAt(x, y + 1),
-        getCellValueAt(x, y - 1),
-        getCellValueAt(x + 1, y + 1),
-        getCellValueAt(x + 1, y),
-        getCellValueAt(x + 1, y - 1),
-        getCellValueAt(x - 1, y + 1),
-        getCellValueAt(x - 1, y),
-        getCellValueAt(x - 1, y - 1)
-    ).map { it }.sum()
-
-    private fun Cells.getCellValueAt(x: Int, y: Int) = get(x to y)
 
 }
