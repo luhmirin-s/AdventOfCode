@@ -1,37 +1,35 @@
 package y2017.week2
 
 import core.AbstractDay
-import core.extensions.addLeadingZeros
 import core.extensions.incLooping
+import core.extensions.joinWithoutSpaces
 
 class Day10(input: List<String>) : AbstractDay(input) {
 
     override fun calculate(): String = inputFirstLine.split(",").map { it.toInt() }
-        .let { pinches ->
-            val state = State()
-            List(256) { it }.mixListUp(pinches, state)
-        }
+        .let { mixUpTimes(it, 1) }
         .let { it[0] * it[1] }
         .toString()
 
     override fun calculateAdvanced() = inputFirstLineChars.map { it.toInt() }
         .let { it + listOf(17, 31, 73, 47, 23) }
-        .let { pinches ->
-            val state = State()
-            var list = List(256) { it }
-            (0..63).forEach { list = list.mixListUp(pinches, state) }
-            list
-        }
+        .let { mixUpTimes(it, 64) }
         .chunked(16)
-        .map { it.reduceRight { c, i -> c.xor(i) } }
-        .map { it.toString(16).addLeadingZeros(2) }
-        .reduceRight { c, s -> c + s }
-        .toString()
+        .map { it.reduce { c, i -> c.xor(i) } }
+        .map { it.toString(16).padStart(2, '0') }
+        .joinWithoutSpaces()
 
     private data class State(
         var skipSize: Int = 0,
         var currentIndex: Int = 0
     )
+
+    private fun mixUpTimes(pinches: List<Int>, times: Int): List<Int> {
+        val state = State()
+        var list = List(256) { it }
+        (0 until times).forEach { list = list.mixListUp(pinches, state) }
+        return list
+    }
 
     private fun List<Int>.mixListUp(pinches: List<Int>, state: State): List<Int> {
         var result = this

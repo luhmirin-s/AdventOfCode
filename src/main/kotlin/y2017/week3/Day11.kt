@@ -8,7 +8,7 @@ class Day11(input: List<String>) : AbstractDay(input) {
 
     override fun calculate(): String = inputFirstLine
         .mapToSteps()
-        .foldRight(Hex(0, 0)) { r, l -> l + r }
+        .fold(Hex(0, 0)) { r, l -> l + r }
         .distanceToCenter()
         .toString()
 
