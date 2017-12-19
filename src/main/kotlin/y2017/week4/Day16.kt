@@ -1,10 +1,7 @@
 package y2017.week4
 
 import core.AbstractDay
-import core.extensions.Collector
-import core.extensions.collect
-import core.extensions.joinWithoutSpaces
-import core.extensions.toCharList
+import core.extensions.*
 
 private typealias Dancers = List<Char>
 
@@ -12,7 +9,7 @@ class Day16(input: List<String>) : AbstractDay(input) {
 
     override fun calculate() = inputFirstLine.split(",")
         .map { it.toMove() }
-        .collect(Collector("abcdefghijklmnop".toCharList())) { c, move ->
+        .collect(Collector(dancers)) { c, move ->
             c.value = move.perform(c.value)
         }
         .value
@@ -21,7 +18,7 @@ class Day16(input: List<String>) : AbstractDay(input) {
     override fun calculateAdvanced() = inputFirstLine.split(",")
         .map { it.toMove() }
         .let { list ->
-            Collector("abcdefghijklmnop".toCharList()).also {
+            Collector(dancers).also {
                 for (i in 0 until 1_000_000_000) {
                     it.value = list[i % list.size].perform(it.value)
                 }
@@ -29,6 +26,8 @@ class Day16(input: List<String>) : AbstractDay(input) {
         }
         .value
         .joinWithoutSpaces()
+
+    private val dancers = "abcdefghijklmnop".toCharList()
 
     private fun String.toMove() = when (this.first()) {
         's' -> Move.Spin(this.substring(1).toInt())
@@ -45,17 +44,9 @@ class Day16(input: List<String>) : AbstractDay(input) {
 
         abstract fun perform(dancers: Dancers): Dancers
 
-        fun Dancers.swap(positions: Pair<Int, Int>): Dancers {
-            val newValues = get(positions.second) to get(positions.first)
-            return toMutableList().apply {
-                set(positions.first, newValues.first)
-                set(positions.second, newValues.second)
-            }
-        }
-
         class Spin(val steps: Int) : Move() {
             override fun perform(dancers: Dancers) = (dancers.size - steps)
-                .let { dancers.subList(it, dancers.size) + dancers.subList(0, it) }
+                .let { dancers.rotate(it) }
         }
 
         class Exchange(val positions: List<Int>) : Move() {

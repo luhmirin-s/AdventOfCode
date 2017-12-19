@@ -22,3 +22,14 @@ fun <T> List<T>.printEach(prefix: String? = null, suffix: String? = null): List<
     suffix?.print()
     return this
 }
+
+
+fun <T> Collection<T>.rotate(steps: Int) = drop(steps) + take(steps)
+
+fun <T> List<T>.swap(positions: Pair<Int, Int>): List<T> {
+    val newValues = get(positions.second) to get(positions.first)
+    return toMutableList().apply {
+        set(positions.first, newValues.first)
+        set(positions.second, newValues.second)
+    }
+}
