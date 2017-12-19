@@ -196,7 +196,7 @@ class Solutions2017Spek : Spek({
             day.calculate().should.equal("1971")
         }
         it("gets star for advanced") {
-            day.calculateAdvanced().should.equal("")
+            day.calculateAdvanced().should.equal("17202899")
         }
     }
 })

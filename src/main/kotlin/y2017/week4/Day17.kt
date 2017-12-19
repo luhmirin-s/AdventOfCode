@@ -7,16 +7,15 @@ import java.util.*
 class Day17(input: List<String>) : AbstractDay(input) {
 
     override fun calculate(): String = inputFirstLine.toInt()
-        .let { makeSpinLock(it, 2017) }
+        .let { bruteForceSpinLock(it, 2017) }
         .findNextAfter(2017)
         .toString()
 
     override fun calculateAdvanced() = inputFirstLine.toInt()
-        .let { makeSpinLock(it, 50_000_000) }
-        .findNextAfter(0)
+        .let { steps -> trackFirstInSpinLock(steps, 50_000_000) }
         .toString()
 
-    private fun makeSpinLock(steps: Int, count: Int): List<Int> {
+    private fun bruteForceSpinLock(steps: Int, count: Int): List<Int> {
         val list = LinkedList<Int>()
         var pos = 0
         for (i in 0..count) {
@@ -24,6 +23,16 @@ class Day17(input: List<String>) : AbstractDay(input) {
             pos = pos.incLooping(list.size, steps + 1)
         }
         return list
+    }
+
+    private fun trackFirstInSpinLock(steps: Int, count: Int): Int {
+        var pos = 0
+        var result = -1
+        for (t in 1..(count + 1)) {
+            pos = pos.incLooping(t, steps) + 1
+            if (pos == 1) result = t
+        }
+        return result
     }
 
     private fun List<Int>.findNextAfter(i: Int) = this[indexOf(i).incLooping(size)]
