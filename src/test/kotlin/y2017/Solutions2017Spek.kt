@@ -10,6 +10,7 @@ import y2017.week2.*
 import y2017.week3.*
 import y2017.week4.Day16
 import y2017.week4.Day17
+import y2017.week4.Day18
 
 class Solutions2017Spek : Spek({
 
@@ -197,6 +198,17 @@ class Solutions2017Spek : Spek({
         }
         it("gets star for advanced") {
             day.calculateAdvanced().should.equal("17202899")
+        }
+    }
+
+    given("day 18") {
+        val day = load2017input(18) { Day18(it) }
+
+        it("gets star for simple") {
+            day.calculate().should.equal("9423")
+        }
+        it("gets star for advanced") {
+            day.calculateAdvanced().should.equal("7620")
         }
     }
 })
