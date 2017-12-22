@@ -3,6 +3,7 @@ package y2017.week4
 import core.AbstractDay
 import core.extensions.Direction
 import core.extensions.Direction.*
+import core.extensions.Vector2
 import core.extensions.joinWithoutSpaces
 import core.extensions.toCharList
 
@@ -21,9 +22,10 @@ class Day19(input: List<String>) : AbstractDay(input) {
     private fun runAround(field: List<List<Char>>, letters: MutableList<Char>): Int {
         var steps = 1
         var direction = DOWN
-        var pos = Point(field[0].indexOf('|'), 0)
+        var pos = Vector2(field[0].indexOf('|'), 0)
         while (true) {
-            pos += direction
+            // Using only bottom left quadrant, so all vectors are subtracted instead
+            pos -= direction
 
             val c = field[pos.y][pos.x]
             when (c) {
@@ -37,19 +39,14 @@ class Day19(input: List<String>) : AbstractDay(input) {
         }
     }
 
-    private data class Point(val x: Int, val y: Int) {
-        // Because field is some looney upside down land :)
-        operator fun plus(d: Direction) = Point(x - d.dx, y - d.dy)
-    }
-
-    private fun Direction.changeDirection(point: Point, field: List<List<Char>>): Direction = when (this) {
-        LEFT, RIGHT -> when {
+    private fun Direction.changeDirection(point: Vector2, field: List<List<Char>>): Direction = when (this) {
+        RIGHT, LEFT -> when {
             field[point.y - 1][point.x] != ' ' -> UP
             else -> DOWN
         }
         UP, DOWN -> when {
-            field[point.y][point.x - 1] != ' ' -> LEFT
-            else -> RIGHT
+            field[point.y][point.x - 1] != ' ' -> RIGHT
+            else -> LEFT
         }
     }
 

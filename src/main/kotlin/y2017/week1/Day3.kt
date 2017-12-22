@@ -1,50 +1,52 @@
 package y2017.week1
 
 import core.AbstractDay
-import core.extensions.*
-import kotlin.math.absoluteValue
+import core.extensions.Direction
+import core.extensions.Vector2
 
+private typealias Cell = Pair<Vector2, Int>
+private typealias Cells = Map<Vector2, Int>
 
 class Day3(input: List<String>) : AbstractDay(input) {
 
     override fun calculate(): String = inputFirstLine.toInt()
         .let { getCells(it) { _, _, v -> v + 1 } }
-        .let { it.first.first.absoluteValue + it.first.second.absoluteValue }
+        .first
+        .manhattanDistance
         .toString()
 
     override fun calculateAdvanced(): String = inputFirstLine.toInt()
-        .let { getCells(it) { cells, c, _ -> cells.getSumOfNeighbours(c.first, c.second) } }
+        .let { getCells(it) { cells, c, _ -> cells.getSumOfNeighbours(c) } }
         .second
         .toString()
 
     private inline fun getCells(
         maxValue: Int,
-        crossinline nextValueCallback: (Cells, Point, Int) -> Int
+        crossinline nextValueCallback: (Cells, Vector2, Int) -> Int
     ): Cell {
-        val cells = mutableMapOf<Point, Int>()
-        var x = 0
-        var y = 0
+        val cells = mutableMapOf<Vector2, Int>()
+
+        var c = Vector2(0, 0)
         var v = 1
-        var direction = Direction.LEFT
+        var direction = Direction.RIGHT
 
         for (i in 0..300000) {
-            cells.put(x to y, v)
+            cells.put(c, v)
 
-            if (v >= maxValue) return ((x to y) to v)
+            if (v >= maxValue) return (c to v)
 
-            x += direction.dx
-            y += direction.dy
-            v = nextValueCallback(cells, x to y, v)
+            c += direction
+            v = nextValueCallback(cells, c, v)
 
-            when (direction) {
-                Direction.LEFT -> cells.getCellValueAt(x, y + 1) ?: run { direction = Direction.UP }
-                Direction.UP -> cells.getCellValueAt(x - 1, y) ?: run { direction = Direction.RIGHT }
-                Direction.RIGHT -> cells.getCellValueAt(x, y - 1) ?: run { direction = Direction.DOWN }
-                Direction.DOWN -> cells.getCellValueAt(x + 1, y) ?: run { direction = Direction.LEFT }
+            if (cells[c + direction.turnLeft()] == null) {
+                direction = direction.turnLeft()
             }
         }
 
         throw RuntimeException("range too small")
     }
+
+    private fun Cells.getSumOfNeighbours(c: Vector2): Int = c.neighbours.mapNotNull { get(it) }.sum()
+
 
 }

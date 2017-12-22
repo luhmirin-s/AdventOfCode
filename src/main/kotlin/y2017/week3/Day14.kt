@@ -1,7 +1,7 @@
 package y2017.week3
 
 import core.AbstractDay
-import core.extensions.Point
+import core.extensions.Vector2
 import core.extensions.toCharList
 import y2017.KnotHash
 
@@ -14,17 +14,17 @@ class Day14(input: List<String>) : AbstractDay(input) {
         .toString()
 
     override fun calculateAdvanced(): String {
-        val regions = mutableListOf<Set<Point>>()
+        val regions = mutableListOf<Set<Vector2>>()
 
         val usedPoints = inputFirstLine.transformToGrid()
             .mapIndexed { y, row ->
-                row.mapIndexedNotNull { x, used -> if (used) Point(x, y) else null }
+                row.mapIndexedNotNull { x, used -> if (used) Vector2(x, y) else null }
             }
             .flatMap { it }
 
         usedPoints.forEach { point ->
             if (regions.none { it.contains(point) }) {
-                val newRegion = mutableSetOf<Point>()
+                val newRegion = mutableSetOf<Vector2>()
                 point.getAllConnected(usedPoints, newRegion)
                 regions.add(newRegion)
             }
@@ -41,14 +41,9 @@ class Day14(input: List<String>) : AbstractDay(input) {
         .map { it.toInt(16).toString(2).padStart(4, '0') }
         .flatMap { it.toCharList().map { it == '1' } }
 
-    private fun Point.getAllConnected(points: List<Point>, region: MutableSet<Point>) {
+    private fun Vector2.getAllConnected(points: List<Vector2>, region: MutableSet<Vector2>) {
         region.add(this)
-        listOf(
-            Point(first - 1, second),
-            Point(first + 1, second),
-            Point(first, second - 1),
-            Point(first, second + 1)
-        ).forEach {
+        orthogonalNeighbours.forEach {
             if (!region.contains(it) && points.contains(it)) it.getAllConnected(points, region)
         }
     }

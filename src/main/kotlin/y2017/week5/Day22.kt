@@ -48,7 +48,7 @@ class Day22(input: List<String>) : AbstractDay(input) {
             infected.put(pos, '#')
             infectsCaused++
         }
-        pos = pos.move(direction)
+        pos += direction
     }
 
     private fun Virus.burst2(infected: MutableMap<Vector2, Char>) = apply {
@@ -70,6 +70,6 @@ class Day22(input: List<String>) : AbstractDay(input) {
                 infected.remove(pos)
             }
         }
-        pos = pos.move(direction)
+        pos += direction
     }
 }

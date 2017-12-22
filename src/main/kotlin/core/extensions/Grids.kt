@@ -1,58 +1,76 @@
 package core.extensions
 
 import kotlin.math.abs
-
-// 2D infinite int grid stored in hashmap for quicker access
-
-typealias Point = Pair<Int, Int>
-typealias Cell = Pair<Point, Int>
-typealias Cells = Map<Point, Int>
-
-fun Cells.getSumOfNeighbours(x: Int, y: Int): Int = listOfNotNull(
-    getCellValueAt(x, y + 1),
-    getCellValueAt(x, y - 1),
-    getCellValueAt(x + 1, y + 1),
-    getCellValueAt(x + 1, y),
-    getCellValueAt(x + 1, y - 1),
-    getCellValueAt(x - 1, y + 1),
-    getCellValueAt(x - 1, y),
-    getCellValueAt(x - 1, y - 1)
-).map { it }.sum()
-
-fun Cells.getCellValueAt(x: Int, y: Int) = get(x to y)
+import kotlin.math.absoluteValue
 
 
 data class Vector2(val x: Int, val y: Int) {
-    fun move(d: Direction) = Vector2(x + d.dx, y + d.dy)
+
+    val manhattanDistance get() = x.absoluteValue + y.absoluteValue
+
+    val orthogonalNeighbours
+        get() = listOf(
+            Vector2(x - 1, y),
+            Vector2(x + 1, y),
+            Vector2(x, y - 1),
+            Vector2(x, y + 1)
+        )
+
+    val neighbours
+        get() = listOf(
+            Vector2(x - 1, y + 1),
+            Vector2(x - 1, y),
+            Vector2(x - 1, y - 1),
+            Vector2(x, y + 1),
+            Vector2(x, y - 1),
+            Vector2(x + 1, y + 1),
+            Vector2(x + 1, y),
+            Vector2(x + 1, y - 1)
+        )
+
+    operator fun plus(v: Direction) = Vector2(x + v.dx, y + v.dy)
+    operator fun plus(v: Vector2) = Vector2(x + v.x, y + v.y)
+
+    operator fun minus(v: Direction) = Vector2(x - v.dx, y - v.dy)
+    operator fun minus(v: Vector2) = Vector2(x - v.x, y - v.y)
 }
 
 enum class Direction(val dx: Int, val dy: Int) {
-    LEFT(1, 0),
+    RIGHT(1, 0),
     UP(0, 1),
-    RIGHT(-1, 0),
+    LEFT(-1, 0),
     DOWN(0, -1);
 
     fun turnRight() = when (this) {
-        LEFT -> UP
-        UP -> RIGHT
-        RIGHT -> DOWN
-        DOWN -> LEFT
-    }
-
-    fun turnLeft() = when (this) {
-        LEFT -> DOWN
-        UP -> LEFT
         RIGHT -> UP
+        UP -> LEFT
+        LEFT -> DOWN
         DOWN -> RIGHT
     }
 
-    fun reverse()= when (this) {
-        LEFT -> RIGHT
-        UP -> DOWN
+    fun turnLeft() = when (this) {
+        RIGHT -> DOWN
+        UP -> RIGHT
+        LEFT -> UP
+        DOWN -> LEFT
+    }
+
+    fun reverse() = when (this) {
         RIGHT -> LEFT
+        UP -> DOWN
+        LEFT -> RIGHT
         DOWN -> UP
     }
 }
+
+//  3D grid
+
+data class Vector3(val x: Int, val y: Int, val z: Int) {
+    val manhattanDistance get() = x.absoluteValue + y.absoluteValue + z.absoluteValue
+
+    operator fun plus(v: Vector3) = Vector3(x + v.x, y + v.y, z + v.z)
+}
+
 
 // Hex grid
 
@@ -62,3 +80,5 @@ data class Hex(val r: Int, val q: Int) {
 
     fun distanceToCenter() = (abs(q) + abs(q + r) + abs(r)) / 2
 }
+
+
