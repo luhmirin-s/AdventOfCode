@@ -21,11 +21,37 @@ fun Cells.getSumOfNeighbours(x: Int, y: Int): Int = listOfNotNull(
 
 fun Cells.getCellValueAt(x: Int, y: Int) = get(x to y)
 
+
+data class Vector2(val x: Int, val y: Int) {
+    fun move(d: Direction) = Vector2(x + d.dx, y + d.dy)
+}
+
 enum class Direction(val dx: Int, val dy: Int) {
     LEFT(1, 0),
     UP(0, 1),
     RIGHT(-1, 0),
-    DOWN(0, -1)
+    DOWN(0, -1);
+
+    fun turnRight() = when (this) {
+        LEFT -> UP
+        UP -> RIGHT
+        RIGHT -> DOWN
+        DOWN -> LEFT
+    }
+
+    fun turnLeft() = when (this) {
+        LEFT -> DOWN
+        UP -> LEFT
+        RIGHT -> UP
+        DOWN -> RIGHT
+    }
+
+    fun reverse()= when (this) {
+        LEFT -> RIGHT
+        UP -> DOWN
+        RIGHT -> LEFT
+        DOWN -> UP
+    }
 }
 
 // Hex grid
