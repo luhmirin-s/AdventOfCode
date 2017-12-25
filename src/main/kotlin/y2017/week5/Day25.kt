@@ -34,7 +34,7 @@ class Day25(input: List<String>) : AbstractDay(input) {
         val direction: Int,
         val nextState: String
     )
-    
+
     private fun List<String>.parseState() = map { it.trim().split(" ", ".", ":") }.let {
         it[0][2] to Pair(
             State(
