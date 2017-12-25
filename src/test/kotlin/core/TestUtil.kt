@@ -13,9 +13,7 @@ fun readPathAsLines(path: String): List<String> = Dummy().javaClass.classLoader
 
 
 fun loadLinesForYear(year: Int, day: Int): List<String> =
-    "inputs/y$year/week${getWeekNumber(day)}/day_$day.in".let { readPathAsLines(it) }
-
-fun getWeekNumber(day: Int) = ((day - 1) / 5) + 1
+    "inputs/y$year/day_$day.in".let { readPathAsLines(it) }
 
 fun load2015input(day: Int, cd: (List<String>) -> AbstractDay) =
     loadLinesForYear(2015, day).let(cd)

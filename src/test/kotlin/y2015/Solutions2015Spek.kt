@@ -6,11 +6,6 @@ import core.readPathAsLines
 import org.jetbrains.spek.api.Spek
 import org.jetbrains.spek.api.dsl.given
 import org.jetbrains.spek.api.dsl.it
-import y2015.week1.*
-import y2015.week2.*
-import y2015.week3.*
-import y2015.week4.*
-import y2015.week5.*
 
 class Solutions2015Spek : Spek({
 
@@ -145,7 +140,7 @@ class Solutions2015Spek : Spek({
         it("gets star for advanced") {
             // It appears that parsing Jsit in pure Kotlin is problematic
             // input file was cleaned up manually (sic!)
-            readPathAsLines("inputs/y2015/week3/day_12_2.in")
+            readPathAsLines("inputs/y2015/day_12_2.in")
                 .let { Day12(it) }
                 .calculateAdvanced()
                 .should.equal("96852")

@@ -5,11 +5,6 @@ import core.load2017input
 import org.jetbrains.spek.api.Spek
 import org.jetbrains.spek.api.dsl.given
 import org.jetbrains.spek.api.dsl.it
-import y2017.week1.*
-import y2017.week2.*
-import y2017.week3.*
-import y2017.week4.*
-import y2017.week5.*
 
 class Solutions2017Spek : Spek({
 
